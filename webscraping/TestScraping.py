@@ -10,7 +10,7 @@ headers = {  # <-- so the Google will treat your script as a "real" user browser
 }
 
 response = requests.get(
-  'https://www.google.com/search?q=camiseta+blanca+flores&tbm=shop',
+  'https://www.zara.com/es/es/search?searchTerm=camisa%20blanca&section=MAN',
   headers=headers).text
 
 soup = BeautifulSoup(response, 'lxml')
@@ -26,16 +26,17 @@ with open('filename.txt', 'w') as f:
     sys.stdout = original_stdout # Reset the standard output to its original value
 
 
-for productContainer in soup.findAll('div', class_='sh-pr__product-results-grid'):
-  title = productContainer.find('h4', class_='Xjkr3b').text
+for productContainer in soup.findAll('li', class_='product-grid-product'):
+  supplier = productContainer.find('a', class_='product-link').get(href)
+  image = productContainer.find('img', class_='media-image').get('src')
+  title = productContainer.find('img', class_='media-image').get('alt')
   #price = productContainer.find('span', class_='a8Pemb').text
-  supplier = productContainer.find('a', class_='xCpuod').get(href)
-  #image = productContainer.find('div', class_='Ar0c1c').find('img')
 
   data.append({
     "Title": title,
     #"Price": price,
     "Supplier": supplier,
+    "Image": image,
   })
 
 print(json.dumps(data, indent = 2, ensure_ascii = False))
