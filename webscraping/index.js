@@ -16,7 +16,7 @@ const puppeteer = require('puppeteer');
   });
   
   setTimeout(async () => {
-    await page.screenshot({ path: './test_images/example.png' });
+    await page.screenshot({ path: './test-images/example.png' });
   
     await browser.close();
   }, 5000);
