@@ -1,3 +1,4 @@
 webscraping/node_modules
+webscraping/output.json
 .DS_Store
 .vscode/*
