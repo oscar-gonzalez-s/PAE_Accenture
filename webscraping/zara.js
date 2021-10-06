@@ -24,7 +24,7 @@ const fs = require("fs");
   // Navigate to website with the search result
   // TODO: Use labels from arguments
   await page.goto(
-    'https://www.zara.com/es/es/search?searchTerm=camiseta%20blanca%20mujer&section=WOMAN',
+    'https://www.zara.com/es/es/search?searchTerm=camiseta%20blanca&section=WOMAN',
     { waitUntil: 'domcontentloaded' }
   ); 
 
@@ -33,7 +33,8 @@ const fs = require("fs");
   const outputList = await page.evaluate(() => {
     const productList = [...document.querySelectorAll('.product-grid-product')];
 
-    return productList.map(product => {
+    // TODO: Get length as param
+    return productList.slice(0, 2).map(product => {
       const name = product.querySelector('.product-grid-product-info__name').textContent;
       const price = product.querySelector('.product-grid-product-info__price').textContent;
       const src = product.querySelector('.product-link').href;
