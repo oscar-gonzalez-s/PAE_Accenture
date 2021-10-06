@@ -6,8 +6,12 @@ const puppeteer = require('puppeteer');
     const page = await browser.newPage();
     await page.goto('https://www.instagram.com/traffygirls/', { waitUntil: 'domcontentloaded' });
 
+    
+
     //await page.waitForSelector('button');
     await page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
+
+    await page.screenshot({ path: './exampleInsta1.png' });
     
     await page.evaluate(() => {
         const buttons = [...document.querySelectorAll('button')];
@@ -21,7 +25,9 @@ const puppeteer = require('puppeteer');
         
     });
 
-    await page.screenshot({ path: './test-images/exampleInsta.png' });
+    await page.waitForTimeout(5000)
+
+    await page.screenshot({ path: './exampleInsta2.png' });
 
     await browser.close();
 
