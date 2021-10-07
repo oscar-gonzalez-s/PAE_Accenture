@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const fs = require("fs");
+const Utils = require('./Utils');
 
 (async () => {
   // Set devtools to true for debugging
@@ -49,14 +49,7 @@ const fs = require("fs");
     })
   });
   
-  // TODO: Read existing json and change only zara value
-  const jsonObj = {
-    zara: outputList
-  }
-  fs.writeFile('output.json', JSON.stringify(jsonObj, null, 4), 'utf8', (err) => {
-    if (err) throw err;
-    console.log('JSON file generated. Closing browser...');
-  });
+  Utils.updateOutput({ zara: outputList });
 
   await browser.close();
 })();

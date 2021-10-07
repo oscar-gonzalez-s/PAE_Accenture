@@ -1,4 +1,5 @@
 webscraping/node_modules
 webscraping/output.json
+webscraping/test-images/*
 .DS_Store
 .vscode/*
