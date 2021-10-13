@@ -1,7 +1,7 @@
-const puppeteer = require("puppeteer");
-const Utils = require("./Utils");
-const appConstants = require("./appConstants");
-const csv = require("csvtojson");
+import appConstants from "./appConstants.js";
+import csv from 'csvtojson';
+import puppeteer from 'puppeteer';
+import { updateOutput } from "./Utils.js";
 
 (async () => {
   // Set devtools to true for debugging
@@ -14,40 +14,33 @@ const csv = require("csvtojson");
   await page.setDefaultNavigationTimeout(0);
 
   // Set page dimensions for better image quality
-  await page.setViewport({
-    width: 1920,
-    height: 1080,
-    deviceScaleFactor: 1,
-  });
+  await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
 
   // Uncomment to view page logs
   // await page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
 
   // Navigate to website with the search result
   // TODO: Use labels from arguments
-
-  const labels = await csv().fromFile("labels.csv");
+/*   const labels = await csv().fromFile("labels.csv");
 
   if (labels[0].gender == "hombre") {
     labels[0].gender = "MAN";
-  }
-  if (labels[0].gender == "mujer") {
+  } else if (labels[0].gender == "mujer") {
     labels[0].gender = "WOMAN";
   }
-
   console.log(labels[0].gender);
 
-  https: await page.goto(
+  await page.goto(
     `https://www.zara.com/es/es/search?searchTerm=${labels[0].prendas
       .split(" ")
       .join("%20")}&section=${labels[0].gender}`,
     { waitUntil: "domcontentloaded" }
-  );
+  ); */
 
-/*   await page.goto(
+  await page.goto(
     'https://www.zara.com/es/es/search?searchTerm=camiseta%20blanca&section=WOMAN',
     { waitUntil: 'domcontentloaded' }
-  ); */
+  );
 
   await page.waitForTimeout(2000);
 
@@ -74,7 +67,7 @@ const csv = require("csvtojson");
     });
   });
 
-  Utils.updateOutput({ zara: outputList }, appConstants.retailOutput);
+  await updateOutput({ zara: outputList }, appConstants.retailOutput);
 
   await browser.close();
 })();

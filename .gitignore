@@ -1,6 +1,8 @@
 webscraping/node_modules
-webscraping/*.json
 webscraping/*.png
 webscraping/test-images/*
+webscraping/*.json
+!webscraping/.eslintrc.json
+
 .DS_Store
-.vscode/*
+**/.vscode/*

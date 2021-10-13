@@ -1,9 +1,9 @@
-const puppeteer = require('puppeteer');
-const appConstants = require("./appConstants");
-const Utils = require("./Utils");
+import appConstants from "./appConstants.js";
+import puppeteer from 'puppeteer';
+import { updateOutput } from "./Utils.js";
 
 (async () => {
-  // Set devtools to true for debugging
+  // Devtools set to true is required
   const browser = await puppeteer.launch({devtools: true});
 
   // Create new page
@@ -29,7 +29,7 @@ const Utils = require("./Utils");
     { waitUntil: 'domcontentloaded' }
   ); 
 
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(2000);
 
   const outputList = await page.evaluate(() => {
     const productList = [...document.querySelectorAll('.ebx-grid-item')];
@@ -49,7 +49,7 @@ const Utils = require("./Utils");
     })
   });
   
-  Utils.updateOutput({ pull: outputList }, appConstants.retailOutput);
+  await updateOutput({ pull: outputList }, appConstants.retailOutput);
 
   await browser.close();
 })();

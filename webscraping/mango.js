@@ -1,10 +1,10 @@
-const puppeteer = require('puppeteer');
-const appConstants = require("./appConstants");
-const Utils = require("./Utils");
+import appConstants from "./appConstants.js";
+import puppeteer from 'puppeteer';
+import { updateOutput } from "./Utils.js";
 
 (async () => {
   // Set devtools to true for debugging
-  const browser = await puppeteer.launch({devtools: true});
+  const browser = await puppeteer.launch({devtools: false});
 
   // Create new page
   const page = await browser.newPage();
@@ -29,7 +29,7 @@ const Utils = require("./Utils");
     { waitUntil: 'domcontentloaded' }
   ); 
 
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(2000);
 
   const outputList = await page.evaluate(() => {
     const productList = [...document.querySelectorAll('.page > div > ul > li')];
@@ -50,7 +50,7 @@ const Utils = require("./Utils");
     })
   });
   
-  Utils.updateOutput({ mango: outputList }, appConstants.retailOutput);
+  await updateOutput({ mango: outputList }, appConstants.retailOutput);
 
   await browser.close();
 })();

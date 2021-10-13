@@ -1,9 +1,9 @@
-const puppeteer = require("puppeteer");
-const appConstants = require("./appConstants");
-const Utils = require("./Utils");
+import appConstants from "./appConstants.js";
+import puppeteer from 'puppeteer';
+import { updateOutput } from "./Utils.js";
 
 (async () => {
-  // Set devtools to true for debugging
+  // Devtools set to true is required
   const browser = await puppeteer.launch({ devtools: true });
 
   // Create new page
@@ -15,18 +15,12 @@ const Utils = require("./Utils");
   await page.setDefaultNavigationTimeout(0);
 
   // Set page dimensions for better image quality
-  await page.setViewport({
-    width: 1920,
-    height: 1080,
-    deviceScaleFactor: 1,
-  });
+  await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
 
   await page.goto(
     "https://www2.hm.com/es_es/search-results.html?q=camiseta+blanca",
     { waitUntil: "domcontentloaded" }
   );
-  // per passar parametres.
-  const queryString = window.location.search;
 
   await page.waitForTimeout(2000);
 
@@ -49,7 +43,7 @@ const Utils = require("./Utils");
     });
   });
 
-  Utils.updateOutput({ hm: outputList }, appConstants.retailOutput);
+  await updateOutput({ hm: outputList }, appConstants.retailOutput);
   
   await browser.close();
 })();
