@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
-const fs = require("fs");
+const appConstants = require("./appConstants");
+const Utils = require("./Utils");
 
 (async () => {
   // Set devtools to true for debugging
@@ -49,7 +50,7 @@ const fs = require("fs");
     })
   });
   
-  Utils.updateOutput({ mango: outputList });
+  Utils.updateOutput({ mango: outputList }, appConstants.retailOutput);
 
   await browser.close();
 })();

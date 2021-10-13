@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const Utils = require("./Utils");
+const appConstants = require("./appConstants");
 const csv = require("csvtojson");
-const { Parser } = require("json2csv");
 
 (async () => {
   // Set devtools to true for debugging
@@ -44,6 +44,11 @@ const { Parser } = require("json2csv");
     { waitUntil: "domcontentloaded" }
   );
 
+/*   await page.goto(
+    'https://www.zara.com/es/es/search?searchTerm=camiseta%20blanca&section=WOMAN',
+    { waitUntil: 'domcontentloaded' }
+  ); */
+
   await page.waitForTimeout(2000);
 
   const outputList = await page.evaluate(() => {
@@ -69,7 +74,7 @@ const { Parser } = require("json2csv");
     });
   });
 
-  Utils.updateOutput({ zara: outputList });
+  Utils.updateOutput({ zara: outputList }, appConstants.retailOutput);
 
   await browser.close();
 })();
