@@ -48,14 +48,7 @@ const fs = require("fs");
     })
   });
   
-  // TODO: Read existing json and change only zara value
-  const jsonObj = {
-    pull: outputList
-  }
-  fs.writeFile('output.json', JSON.stringify(jsonObj, null, 4), 'utf8', (err) => {
-    if (err) throw err;
-    console.log('JSON file generated. Closing browser...');
-  });
+  Utils.updateOutput({ pull: outputList });
 
   await browser.close();
 })();
