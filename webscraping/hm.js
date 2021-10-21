@@ -1,6 +1,7 @@
 import appConstants from "./appConstants.js";
-import puppeteer from 'puppeteer';
+import puppeteer from "puppeteer";
 import { updateOutput } from "./Utils.js";
+import csv from "csvtojson";
 
 (async () => {
   // Devtools set to true is required
@@ -17,8 +18,19 @@ import { updateOutput } from "./Utils.js";
   // Set page dimensions for better image quality
   await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
 
+  const labels = await csv().fromFile("labels.csv");
+
+  let gen = labels[0].gender.trim();
+  let pren = labels[0].prendas.trim().replace(/ +/g, "+");
+
+  if (gen == "hombre") {
+    gen = "men";
+  } else if (gen == "mujer") {
+    gen = "ladies";
+  }
+
   await page.goto(
-    "https://www2.hm.com/es_es/search-results.html?q=camiseta+blanca",
+    `https://www2.hm.com/es_es/search-results.html?q=${pren}&department=${gen}_all&sort=stock&image-size=small&image=stillLife&offset=0&page-size=40`,
     { waitUntil: "domcontentloaded" }
   );
 
@@ -30,7 +42,11 @@ import { updateOutput } from "./Utils.js";
     // TODO: Get length as param
     return productList.slice(0, 2).map((product) => {
       const name = product.querySelector(".link").textContent;
-      const price = product.querySelector(".item-price").textContent;
+      const price = product
+        .querySelector(".item-price")
+        .textContent.replace(/\n/g, "")
+        .replace("€", "")
+        .trim();
       const src = product.querySelector(".item-link").href;
       const imageSrc = product.querySelector("img").src;
 
@@ -44,6 +60,6 @@ import { updateOutput } from "./Utils.js";
   });
 
   await updateOutput({ hm: outputList }, appConstants.retailOutput);
-  
+
   await browser.close();
 })();

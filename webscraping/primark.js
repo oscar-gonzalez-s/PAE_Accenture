@@ -4,8 +4,8 @@ import { updateOutput } from "./Utils.js";
 import csv from "csvtojson";
 
 (async () => {
-  // Devtools set to true is required
-  const browser = await puppeteer.launch({ devtools: true });
+  // Set devtools to true for debugging
+  const browser = await puppeteer.launch({ devtools: false });
 
   // Create new page
   const page = await browser.newPage();
@@ -20,11 +20,6 @@ import csv from "csvtojson";
     deviceScaleFactor: 1,
   });
 
-  const labels = await csv().fromFile("labels.csv");
-
-  let gen = labels[0].gender.trim();
-  let pren = labels[0].prendas.trim().replace(/ +/g, "+");
-
   // Uncomment to view page logs
   // await page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
 
@@ -32,24 +27,40 @@ import csv from "csvtojson";
 
   // TODO: Use labels from arguments
 
+  const labels = await csv().fromFile("labels.csv");
+
+  let gen = labels[0].gender.trim();
+  let pren = labels[0].prendas.trim().replace(/ +/g, "+");
+
+  if (gen == "hombre") {
+    gen = "mens";
+  } else if (gen == "mujer") {
+    gen = "womens";
+  }
+
   await page.goto(
-    `https://www.pullandbear.com/es/mujer-n6417?q=${pren}&filter=hierarchical_category%3A%22${gen}%22`,
+    `https://www.primark.com/search?q=${pren}%3Arelevance%3AnextToRootCategoryName%3A${gen}`,
     { waitUntil: "domcontentloaded" }
   );
 
-  await page.waitForTimeout(10000); //si poso menys temps ja no funciona.
+  await page.waitForTimeout(2000);
 
   const outputList = await page.evaluate(() => {
-    const productList = [...document.querySelectorAll(".ebx-result")];
+    const productList = [
+      ...document.querySelectorAll(".component > div > ul > li"), // product-item
+    ];
 
-    // TODO: Get length as param
+    // TODO: Get length as param --> No se puede.
     return productList.slice(0, 2).map((product) => {
-      const name = product.querySelector(".ebx-result__title").textContent;
+      const name = product
+        .querySelector(".product-item__name")
+        .textContent.replace(/\n/g, "")
+        .trim();
       const price = product
-        .querySelector(".ebx-result-price__value")
+        .querySelector(".product-item__price")
         .textContent.replace("€", "")
         .trim();
-      const src = product.querySelector(".ebx-result-link").href;
+      const src = product.querySelector("a").href;
       const imageSrc = product.querySelector("img").src;
 
       return {
@@ -61,7 +72,7 @@ import csv from "csvtojson";
     });
   });
 
-  await updateOutput({ pull: outputList }, appConstants.retailOutput);
+  await updateOutput({ primark: outputList }, appConstants.retailOutput);
 
   await browser.close();
 })();
