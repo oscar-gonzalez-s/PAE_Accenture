@@ -3,6 +3,7 @@ webscraping/*.png
 webscraping/test-images/*
 webscraping/*.json
 !webscraping/.eslintrc.json
+instaImages/*
 
 .DS_Store
 **/.vscode/*
