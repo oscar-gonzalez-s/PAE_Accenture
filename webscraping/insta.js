@@ -46,7 +46,7 @@ import puppeteer from 'puppeteer';
     }
 
     // TODO: Handle WOMAN or MAN tags
-    await updateOutput(output, appConstants.mediaOutput);
+    await updateOutput({ output }, appConstants.mediaOutput);
 
     await browser.close();
 })();
@@ -63,12 +63,12 @@ const getItemProps = async (page, src, followers, user) => {
         const date = document.querySelector('time')?.dateTime;
             
             return {
-                //comments: comments,
                 likes: likes,
                 date: date,
                 imageSrc: imageSrc
+                //comments: comments,
             };
     });
     
-    return Object.assign(output, { followers: followers, user: user });
+    return Object.assign(output, { followers, user });
 }
