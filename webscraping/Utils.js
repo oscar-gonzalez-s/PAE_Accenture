@@ -26,7 +26,7 @@ export const updateMediaOutput = async (data, path, user) => {
       console.log(`JSON file updated with user ${user}`);
     });
   } else {
-    console.log(`${user} has no data`);
+    console.log(`User ${user} has no data or doesn't exist`);
   }
 }
 

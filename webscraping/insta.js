@@ -1,35 +1,22 @@
-import { cookiesConsent, updateMediaOutput } from './Utils.js';
-
 import appConstants from "./appConstants.js";
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween.js';
+import { updateMediaOutput } from './Utils.js';
 
-const instagram = async (page, user, gender) => {
+export const getUserData = async (page, user, gender) => {
     const output = [];
 
     const now = dayjs();
     const dateLimit = now.subtract("2", "week");
     dayjs.extend(isBetween);
-
-    // await page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
     
-    await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
-    
-    // Accept cookies consent
-    await cookiesConsent(page);
+    await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'networkidle0' });
 
-    const followers = await page.evaluate(() => 
-        document.querySelector('.g47SY')?.textContent?.replace('.', '')
-    );
-    const postList = await page.evaluate(() => 
-        [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')].map(post => post.querySelector('a')?.href)
-    );
-
-    console.log(postList.length);
+    const followers = await page.evaluate(() => document.querySelector('.g47SY')?.textContent?.replace('.', ''));
+    const postList = await page.evaluate(() => [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')].map(post => post.querySelector('a')?.href));
     
     for(let i = 0; i < postList?.length; i++) {
-        const data = await getItemProps(page, postList[i], { followers, user, gender });
+        const data = await getPostData(page, postList[i], { followers, user, gender });
         if (dayjs(data?.date).isBetween(dateLimit, now)) {
             data.date = dayjs(data.date).format('DD/MM/YYYY');
             output.push(data);
@@ -42,17 +29,14 @@ const instagram = async (page, user, gender) => {
 };
 
 
-const getItemProps = async (page, src, additionalData) => {
+const getPostData = async (page, src, additionalData) => {
 
-    console.log(src);
     await page.goto(src, { waitUntil: 'domcontentloaded' });
-    //await page.waitForTimeout(2000);
-    const location = await page.url();
-    console.log(location);
+    await page.waitForTimeout(1000);
 
     const output = await page.evaluate(() => {
-        const imageSrc = document.querySelector("meta[property='og:image']")?.content;
-        const likes = document.querySelector('.zV_Nj span')?.textContent?.replace('.', '');
+        const imageSrc = document.querySelector(".KL4Bh img")?.src;
+        const likes = document.querySelector('.zV_Nj span')?.textContent?.replace(/[,.]/g, '');
         const date = document.querySelector('time')?.dateTime;
             
             return {
@@ -65,5 +49,3 @@ const getItemProps = async (page, src, additionalData) => {
     
     return Object.assign(output, additionalData);
 }
-
-export default instagram;
