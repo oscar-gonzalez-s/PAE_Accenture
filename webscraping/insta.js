@@ -1,42 +1,35 @@
-import { cookiesConsent, updateOutput } from './Utils.js';
+import { cookiesConsent, updateMediaOutput } from './Utils.js';
 
 import appConstants from "./appConstants.js";
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween.js';
-import puppeteer from 'puppeteer';
 
-(async () => {
+const instagram = async (page, user, gender) => {
     const output = [];
 
     const now = dayjs();
     const dateLimit = now.subtract("2", "week");
     dayjs.extend(isBetween);
 
-    const browser = await puppeteer.launch({ devtools: true });
-    const page = await browser.newPage();
-    await page.setViewport({  width: 1920, height: 1080, deviceScaleFactor: 1 });
     // await page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
     
-    // TODO: Get user from external source
-    await page.goto('https://www.instagram.com/traffygirls/', { waitUntil: 'domcontentloaded' });
+    await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'domcontentloaded' });
     await page.waitForTimeout(2000);
     
     // Accept cookies consent
     await cookiesConsent(page);
 
-    // TODO: Get followers count and pass it to getItemProps
     const followers = await page.evaluate(() => 
         document.querySelector('.g47SY')?.textContent?.replace('.', '')
-    );
-    const user = await page.evaluate(() => 
-        document.querySelector('._7UhW9')?.textContent
     );
     const postList = await page.evaluate(() => 
         [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')].map(post => post.querySelector('a')?.href)
     );
+
+    console.log(postList.length);
     
     for(let i = 0; i < postList?.length; i++) {
-        const data = await getItemProps(page, postList[i], followers, user);
+        const data = await getItemProps(page, postList[i], { followers, user, gender });
         if (dayjs(data?.date).isBetween(dateLimit, now)) {
             data.date = dayjs(data.date).format('DD/MM/YYYY');
             output.push(data);
@@ -45,17 +38,17 @@ import puppeteer from 'puppeteer';
         }
     }
 
-    // TODO: Handle WOMAN or MAN tags
-    await updateOutput({ output }, appConstants.mediaOutput);
-
-    await browser.close();
-})();
+    await updateMediaOutput(output, appConstants.mediaOutput, user);
+};
 
 
-const getItemProps = async (page, src, followers, user) => {
+const getItemProps = async (page, src, additionalData) => {
 
+    console.log(src);
     await page.goto(src, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
+    //await page.waitForTimeout(2000);
+    const location = await page.url();
+    console.log(location);
 
     const output = await page.evaluate(() => {
         const imageSrc = document.querySelector("meta[property='og:image']")?.content;
@@ -70,5 +63,7 @@ const getItemProps = async (page, src, followers, user) => {
             };
     });
     
-    return Object.assign(output, { followers, user });
+    return Object.assign(output, additionalData);
 }
+
+export default instagram;
