@@ -15,6 +15,21 @@ export const updateOutput = async (data, path) => {
   });
 }
 
+export const updateMediaOutput = async (data, path, user) => {
+  const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return { output: [] }});
+  
+  if (data?.length) {
+    json.output.push(...data);
+
+    fs.writeFile(path, JSON.stringify(json, null, 4), 'utf8', (err) => {
+      if (err) throw err;
+      console.log(`JSON file updated with user ${user}`);
+    });
+  } else {
+    console.log(`User ${user} has no data or doesn't exist`);
+  }
+}
+
 export const cookiesConsent = async (page) => {
   await page.evaluate(() => {
     const buttons = [...document.querySelectorAll('button')];

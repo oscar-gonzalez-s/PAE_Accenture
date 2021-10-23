@@ -13,12 +13,14 @@ import puppeteer from 'puppeteer';
     // Accept cookies consent
     await cookiesConsent(page);
 
-    const postList = await page.evaluate(() => 
-        [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')]
-    );
+    const posts = await page.$('.v1Nh3.kIKUG._bz0w > img');
 
-    //await postList[0].hover();
-    await page.hover('.v1Nh3.kIKUG._bz0w > img');
+    // console.log(typeof post.hover());
+    for (let post of posts) {
+        //hover on each element handle
+        await post.hover();
+        break;
+    }
     await page.screenshot({ path: 'hover.png' })
 
     await browser.close();

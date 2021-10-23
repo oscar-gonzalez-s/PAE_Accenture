@@ -1,74 +1,49 @@
-import { cookiesConsent, updateOutput } from './Utils.js';
-
 import appConstants from "./appConstants.js";
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween.js';
-import puppeteer from 'puppeteer';
+import { updateMediaOutput } from './Utils.js';
 
-(async () => {
+export const getUserData = async (page, user, gender) => {
     const output = [];
 
     const now = dayjs();
     const dateLimit = now.subtract("2", "week");
     dayjs.extend(isBetween);
+    
+    await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'networkidle0' });
 
-    const browser = await puppeteer.launch({ devtools: true });
-    const page = await browser.newPage();
-    await page.setViewport({  width: 1920, height: 1080, deviceScaleFactor: 1 });
-    // await page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
+    const followers = await page.evaluate(() => document.querySelector('.g47SY')?.textContent?.replace('.', ''));
+    const postList = await page.evaluate(() => [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')].map(post => post.querySelector('a')?.href));
     
-    // TODO: Get user from external source
-    await page.goto('https://www.instagram.com/traffygirls/', { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
-    
-    // Accept cookies consent
-    await cookiesConsent(page);
+    for (let post of postList) {
+        const data = await getPostData(page, post, { followers, user, gender });
 
-    // TODO: Get followers count and pass it to getItemProps
-    const followers = await page.evaluate(() => 
-        document.querySelector('.g47SY')?.textContent?.replace('.', '')
-    );
-    const user = await page.evaluate(() => 
-        document.querySelector('._7UhW9')?.textContent
-    );
-    const postList = await page.evaluate(() => 
-        [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')].map(post => post.querySelector('a')?.href)
-    );
-    
-    for(let i = 0; i < postList?.length; i++) {
-        const data = await getItemProps(page, postList[i], followers, user);
-        if (dayjs(data?.date).isBetween(dateLimit, now)) {
-            data.date = dayjs(data.date).format('DD/MM/YYYY');
-            output.push(data);
-        } else {
-            break;
+        if (data) {
+            if (dayjs(data.date).isBetween(dateLimit, now)) {
+                data.date = dayjs(data.date).format('DD/MM/YYYY');
+                output.push(data);
+            } else {
+                break;
+            }
         }
     }
 
-    // TODO: Handle WOMAN or MAN tags
-    await updateOutput({ output }, appConstants.mediaOutput);
-
-    await browser.close();
-})();
+    await updateMediaOutput(output, appConstants.mediaOutput, user);
+};
 
 
-const getItemProps = async (page, src, followers, user) => {
+const getPostData = async (page, src, additionalData) => {
 
     await page.goto(src, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(1000);
 
     const output = await page.evaluate(() => {
-        const imageSrc = document.querySelector("meta[property='og:image']")?.content;
-        const likes = document.querySelector('.zV_Nj span')?.textContent?.replace('.', '');
+        const imageSrc = document.querySelector(".KL4Bh img")?.src;
+        const likes = document.querySelector('.zV_Nj span')?.textContent?.replace(/[,.]/g, '');
         const date = document.querySelector('time')?.dateTime;
-            
-            return {
-                likes: likes,
-                date: date,
-                imageSrc: imageSrc
-                //comments: comments,
-            };
+
+        return imageSrc ? { likes, date, imageSrc } : null;
     });
     
-    return Object.assign(output, { followers, user });
+    return Object.assign(output, additionalData);
 }
