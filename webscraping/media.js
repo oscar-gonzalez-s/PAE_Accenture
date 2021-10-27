@@ -37,5 +37,6 @@ import puppeteer from 'puppeteer';
 
   await browser.close();
 
+  // TODO: delete existing images
   await downloadAll(appConstants.mediaOutput);
 })()

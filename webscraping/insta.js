@@ -29,7 +29,7 @@ export const getUserData = async (page, user, gender) => {
     
     await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'networkidle0' });
 
-    const followers = await page.evaluate(() => document.querySelector('.g47SY')?.textContent?.replace('.', ''));
+    const followers = await page.evaluate(() => document.querySelectorAll('.g47SY')[1]?.title?.replace(/[,.]/g, ''));
     const postList = await page.evaluate(() => [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')].map(post => post.querySelector('a')?.href));
     
     for (let post of postList) {
