@@ -4,6 +4,11 @@
 
 import fs from 'fs';
 
+/**
+ * Method to update retail output without modifying existing
+ * @param data
+ * @param path
+ *  */ 
 export const updateOutput = async (data, path) => {
   const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return {}});
   
@@ -15,6 +20,12 @@ export const updateOutput = async (data, path) => {
   });
 }
 
+/**
+ * Method to update media output with individual user data
+ * @param data
+ * @param path
+ * @param user
+ *  */ 
 export const updateMediaOutput = async (data, path, user) => {
   const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return { output: [] }});
   
@@ -30,6 +41,10 @@ export const updateMediaOutput = async (data, path, user) => {
   }
 }
 
+/**
+ * Method to update accept cookies consent
+ * @param page
+ *  */ 
 export const cookiesConsent = async (page) => {
   await page.evaluate(() => {
     const buttons = [...document.querySelectorAll('button')];

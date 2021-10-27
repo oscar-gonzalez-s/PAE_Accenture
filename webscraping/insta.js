@@ -3,6 +3,23 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween.js';
 import { updateMediaOutput } from './Utils.js';
 
+/**
+ * Method to enter username and password and submit
+ * @param page
+ *  */ 
+export const login = async (page) => {
+  await page.type('[name="username"]', appConstants.instagramAccount.username);
+  await page.type('[name="password"]', appConstants.instagramAccount.password);
+  await page.click('[type="submit"]'),
+  await page.waitForNavigation({ waitUntil: 'networkidle0' })
+}
+
+/**
+ * Method to get post links from username page and get data
+ * @param page
+ * @param user
+ * @param gender
+ *  */ 
 export const getUserData = async (page, user, gender) => {
     const output = [];
 
@@ -31,7 +48,12 @@ export const getUserData = async (page, user, gender) => {
     await updateMediaOutput(output, appConstants.mediaOutput, user);
 };
 
-
+/**
+ * Method to get post data
+ * @param page
+ * @param src
+ * @param additionalData
+ *  */ 
 const getPostData = async (page, src, additionalData) => {
 
     await page.goto(src, { waitUntil: 'domcontentloaded' });
@@ -42,8 +64,8 @@ const getPostData = async (page, src, additionalData) => {
         const likes = document.querySelector('.zV_Nj span')?.textContent?.replace(/[,.]/g, '');
         const date = document.querySelector('time')?.dateTime;
 
-        return imageSrc ? { likes, date, imageSrc } : null;
+        return { likes, date, imageSrc };
     });
     
-    return Object.assign(output, additionalData);
+    return output.imageSrc ? Object.assign(output, additionalData) : null;
 }

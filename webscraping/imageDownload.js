@@ -1,17 +1,13 @@
-
+import axios from 'axios'
 import fs from 'fs';
 import path from 'path'
-import axios from 'axios'
 
-const dir = '../instaImages';
-const pathJson = './media-output.json';
-
-if(!fs.existsSync(dir)){
-  fs.mkdirSync(dir)
-}
-
-// fileUrl: the absolute url of the image to be downloaded
-
+/**
+ * Method to download a single image
+ * @param fileUrl 
+ * @param downloadFolder 
+ * @param imgName 
+ */
 const downloadFile = async (fileUrl, downloadFolder, imgName) => { // Download a single image
   // Set the file name
   const fileName = String(imgName)+'.jpg';
@@ -34,7 +30,18 @@ const downloadFile = async (fileUrl, downloadFolder, imgName) => { // Download a
   }
 }; 
 
-const downloadAll = async (path) => { // Download all the images of the json file
+/**
+ * Download all the images of the json file
+ * @param path 
+ */
+
+const downloadAll = async (path) => { 
+  const dir = '../instaImages';
+
+  if(!fs.existsSync(dir)){
+    fs.mkdirSync(dir)
+  }
+
   var imageName = 0;
   const images = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch((e) => {throw e });
   const links = images.output.map(post => post.imageSrc);
@@ -46,6 +53,6 @@ const downloadAll = async (path) => { // Download all the images of the json fil
 }
 
 
-downloadAll(pathJson);
+export default downloadAll;
 
 

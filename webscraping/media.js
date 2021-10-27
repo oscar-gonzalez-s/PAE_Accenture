@@ -1,8 +1,10 @@
+import { getUserData, login } from './insta.js';
+
 import appConstants from "./appConstants.js";
 import { cookiesConsent } from './Utils.js';
 import csv from "csvtojson";
+import downloadAll from './imageDownload.js'
 import fs from 'fs';
-import { getUserData } from './insta.js';
 import puppeteer from 'puppeteer';
 
 (async () => { 
@@ -19,11 +21,8 @@ import puppeteer from 'puppeteer';
   // Accept cookies consent
   await cookiesConsent(page);
 
-  // Enter username and password and submit
-  await page.type('[name="username"]', appConstants.instagramAccount.username);
-  await page.type('[name="password"]', appConstants.instagramAccount.password);
-  await page.click('[type="submit"]'),
-  await page.waitForNavigation({ waitUntil: 'networkidle0' })
+  // Log in
+  await login(page);
 
   const femaleUsers = await csv().fromFile("influencers_w.csv");
   const maleUsers = await csv().fromFile("influencers_m.csv");
@@ -32,9 +31,11 @@ import puppeteer from 'puppeteer';
     await getUserData(page, influencer.username, 'WOMAN');
   }
 
-  for (let influencer of maleUsers) {
+/*   for (let influencer of maleUsers) {
     await getUserData(page, influencer.username, 'MAN');
-  }
+  } */
 
   await browser.close();
+
+  await downloadAll(appConstants.mediaOutput);
 })()
