@@ -31,9 +31,9 @@ import puppeteer from 'puppeteer';
     await getUserData(page, influencer.username, 'WOMAN');
   }
 
-/*   for (let influencer of maleUsers) {
+  for (let influencer of maleUsers) {
     await getUserData(page, influencer.username, 'MAN');
-  } */
+  }
 
   await browser.close();
 
