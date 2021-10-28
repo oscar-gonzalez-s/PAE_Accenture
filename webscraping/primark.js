@@ -1,36 +1,7 @@
-import appConstants from "./appConstants.js";
-import puppeteer from "puppeteer";
-import { updateOutput } from "./Utils.js";
-import csv from "csvtojson";
+export default async function primark(page, label) {
 
-(async () => {
-  // Set devtools to true for debugging
-  const browser = await puppeteer.launch({ devtools: false });
-
-  // Create new page
-  const page = await browser.newPage();
-
-  // Remove the navigation timeout
-  await page.setDefaultNavigationTimeout(0);
-
-  // Set page dimensions for better image quality
-  await page.setViewport({
-    width: 1920,
-    height: 1080,
-    deviceScaleFactor: 1,
-  });
-
-  // Uncomment to view page logs
-  // await page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
-
-  // Navigate to website with the search result
-
-  // TODO: Use labels from arguments
-
-  const labels = await csv().fromFile("labels.csv");
-
-  let gen = labels[0].gender.trim();
-  let pren = labels[0].prendas.trim().replace(/ +/g, "+");
+  let gen = label.gender.trim();
+  let pren = label.prendas.trim().replace(/ +/g, "+");
 
   if (gen == "hombre") {
     gen = "mens";
@@ -40,17 +11,14 @@ import csv from "csvtojson";
 
   await page.goto(
     `https://www.primark.com/search?q=${pren}%3Arelevance%3AnextToRootCategoryName%3A${gen}`,
-    { waitUntil: "domcontentloaded" }
+    { waitUntil: "networkidle0" }
   );
-
-  await page.waitForTimeout(2000);
 
   const outputList = await page.evaluate(() => {
     const productList = [
       ...document.querySelectorAll(".component > div > ul > li"), // product-item
     ];
 
-    // TODO: Get length as param --> No se puede.
     return productList.slice(0, 2).map((product) => {
       const name = product
         .querySelector(".product-item__name")
@@ -72,7 +40,5 @@ import csv from "csvtojson";
     });
   });
 
-  await updateOutput({ primark: outputList }, appConstants.retailOutput);
-
-  await browser.close();
-})();
+  return outputList;
+}
