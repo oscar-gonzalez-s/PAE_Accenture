@@ -11,6 +11,7 @@ import puppeteer from 'puppeteer';
   // Delete old output file
   await fs.unlink(appConstants.mediaOutput, () => {});
 
+  // Init browser
   const browser = await puppeteer.launch({ headless: false, devtools: false });
   const page = await browser.newPage();
   await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
@@ -24,15 +25,11 @@ import puppeteer from 'puppeteer';
   // Log in
   await login(page);
 
-  const femaleUsers = await csv().fromFile("influencers_w.csv");
-  const maleUsers = await csv().fromFile("influencers_m.csv");
+  const users = await csv().fromFile("influencers.csv");
 
-  for (let influencer of femaleUsers) {
-    await getUserData(page, influencer.username, 'WOMAN');
-  }
-
-  for (let influencer of maleUsers) {
-    await getUserData(page, influencer.username, 'MAN');
+  for (let user of users) {
+    console.log(user.username + ' ' + user.gender);
+    await getUserData(page, user.username, user.gender);
   }
 
   await browser.close();
