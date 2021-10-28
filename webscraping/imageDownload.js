@@ -1,3 +1,4 @@
+import appConstants from "./appConstants.js";
 import axios from 'axios'
 import fs from 'fs';
 import path from 'path'
@@ -36,7 +37,7 @@ const downloadFile = async (fileUrl, downloadFolder, imgName) => { // Download a
  */
 
 const downloadAll = async (path) => { 
-  const dir = '../instaImages';
+  const dir = appConstants.downloadFolder;
 
   if(!fs.existsSync(dir)){
     fs.mkdirSync(dir)
