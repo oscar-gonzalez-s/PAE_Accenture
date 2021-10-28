@@ -1,0 +1,6 @@
+La version 2.2 trata de automatizar el reconocimiento de imagenes pasando la imagen como argumento.
+Mejoramos el .txt que se crea. Para empezar no sobreescribimos el .txt, si no queahora vamos añadiendo la 
+información de cada imagen tal que : "nombre imagen" + labels
+
+Implementamos tambien json_edit.py que a partir del label.txt y el json de las imagenes, modificara este último 
+para añadir las etiquetas
