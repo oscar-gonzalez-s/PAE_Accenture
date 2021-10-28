@@ -10,6 +10,8 @@ import puppeteer from 'puppeteer';
 (async () => { 
   // Delete old output file
   await fs.unlink(appConstants.mediaOutput, () => {});
+  // Delete old image folder
+  await fs.rmdir(appConstants.downloadFolder, { recursive: true }, () => {});
 
   // Init browser
   const browser = await puppeteer.launch({ headless: false, devtools: false });
@@ -25,15 +27,13 @@ import puppeteer from 'puppeteer';
   // Log in
   await login(page);
 
-  const users = await csv().fromFile("influencers.csv");
+  const users = await csv().fromFile(appConstants.influencers);
 
   for (let user of users) {
-    console.log(user.username + ' ' + user.gender);
     await getUserData(page, user.username, user.gender);
   }
 
   await browser.close();
 
-  // TODO: delete existing images
   await downloadAll(appConstants.mediaOutput);
 })()
