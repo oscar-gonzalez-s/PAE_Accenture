@@ -3,6 +3,7 @@ webscraping/*.png
 webscraping/*.json
 !webscraping/.eslintrc.json
 assets/instaImages/*
+assets/*.json
 
 .DS_Store
 **/.vscode/*
