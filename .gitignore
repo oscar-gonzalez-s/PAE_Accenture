@@ -1,0 +1,8 @@
+webscraping/node_modules
+webscraping/*.png
+webscraping/*.json
+!webscraping/.eslintrc.json
+assets/instaImages/*
+
+.DS_Store
+**/.vscode/*

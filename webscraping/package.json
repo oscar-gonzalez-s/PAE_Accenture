@@ -1,0 +1,31 @@
+{
+  "name": "pae_accenture",
+  "version": "1.0.0",
+  "description": "This is a test",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint ./**/*.js",
+    "lint-fix": "eslint ./**/*.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oscar-gonzalez-s/PAE_Accenture.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oscar-gonzalez-s/PAE_Accenture/issues"
+  },
+  "homepage": "https://github.com/oscar-gonzalez-s/PAE_Accenture#readme",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "csvtojson": "^2.0.10",
+    "dayjs": "^1.10.7",
+    "path": "^0.12.7",
+    "puppeteer": "^10.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
