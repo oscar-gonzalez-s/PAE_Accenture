@@ -35,9 +35,9 @@ def Draw_Bounding_Box(img, list_obj):
         x2 = int(round(obj['x2']*img_width))
         y2 = int(round(obj['y2']*img_height))
 
-        if obj['label'] == 'short_sleeve_top':
+        if 'camiseta manga corta' in obj['label']:
             color = color_yellow
-        elif obj['label'] == 'trousers':
+        elif 'pantalones' in obj['label'] :
             color = color_red
         else:
             color = color_green
@@ -45,8 +45,14 @@ def Draw_Bounding_Box(img, list_obj):
         text = '{}: {:.2f}'.format(obj['label'], obj['confidence'])
 
         # draw bounding box and labels
+        letter_size = 15
+
+        if (len(obj['label'])*letter_size < (x2-x1)):
+            x = x1
+        else:
+            x = x1-int(0.25*letter_size*len(obj['label']))
         img = cv2.rectangle(img, (x1, y1), (x2, y2), color, 4)
-        img = cv2.putText(img, text, (x1, y1-5), cv2.FONT_HERSHEY_DUPLEX, 0.7, color, 2, cv2.LINE_AA)
+        img = cv2.putText(img, text, (x, y1-10), cv2.FONT_HERSHEY_DUPLEX, 0.7, color, 2, cv2.LINE_AA)
 
     return img
 

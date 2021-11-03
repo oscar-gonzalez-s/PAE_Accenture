@@ -79,7 +79,7 @@ def Detect_Color(img_crop):
     b=peak[2]
     
     index=["color","color_name", "hex", "R", "G", "B"]
-    csv = pd.read_csv('colors.csv', names=index, header=None)
+    csv = pd.read_csv('bdcolores.csv', names=index, header=None)
 
     
     minimum = 10000
