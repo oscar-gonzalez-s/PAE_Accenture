@@ -8,10 +8,11 @@ import { updateMediaOutput } from './Utils.js';
  * @param page
  *  */ 
 export const login = async (page) => {
-  await page.type('[name="username"]', appConstants.instagramAccount.username);
-  await page.type('[name="password"]', appConstants.instagramAccount.password);
-  await page.click('[type="submit"]'),
-  await page.waitForNavigation({ waitUntil: 'networkidle0' })
+    console.log('Logging in...');
+    await page.type('[name="username"]', appConstants.instagramAccount.username);
+    await page.type('[name="password"]', appConstants.instagramAccount.password);
+    await page.click('[type="submit"]'),
+    await page.waitForNavigation({ waitUntil: 'networkidle0' })
 }
 
 /**
@@ -57,7 +58,6 @@ export const getUserData = async (page, user, gender) => {
 const getPostData = async (page, src, additionalData) => {
 
     await page.goto(src, { waitUntil: 'domcontentloaded' });
-    await page.waitForTimeout(1000);
 
     const output = await page.evaluate(() => {
         const imageSrc = document.querySelector(".KL4Bh img")?.src;

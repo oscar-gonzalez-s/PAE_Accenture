@@ -10,14 +10,14 @@ import fs from 'fs';
  * @param path
  *  */ 
 export const updateOutput = async (data, path) => {
-  const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return {}});
+    const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return {}});
   
-  Object.assign(json, data)
+    Object.assign(json, data)
 
-  fs.writeFile(path, JSON.stringify(json, null, 4), 'utf8', (err) => {
-    if (err) throw err;
-    console.log('JSON file generated. Closing browser...');
-  });
+    fs.writeFile(path, JSON.stringify(json, null, 4), 'utf8', (err) => {
+        if (err) throw err;
+        console.log('JSON file generated. Closing browser...');
+    });
 }
 
 /**
@@ -27,18 +27,18 @@ export const updateOutput = async (data, path) => {
  * @param user
  *  */ 
 export const updateMediaOutput = async (data, path, user) => {
-  const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return { output: [] }});
+    const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return { output: [] }});
   
-  if (data?.length) {
-    json.output.push(...data);
+    if (data?.length) {
+        json.output.push(...data);
 
-    fs.writeFile(path, JSON.stringify(json, null, 4), 'utf8', (err) => {
-      if (err) throw err;
-      console.log(`JSON file updated with user ${user}`);
-    });
-  } else {
-    console.log(`User ${user} has no data or doesn't exist`);
-  }
+        fs.writeFile(path, JSON.stringify(json, null, 4), 'utf8', (err) => {
+            if (err) throw err;
+            console.log(`JSON file updated with user ${user}`);
+        });
+    } else {
+        console.log(`User ${user} has no data or doesn't exist`);
+    }
 }
 
 /**
@@ -46,13 +46,14 @@ export const updateMediaOutput = async (data, path, user) => {
  * @param page
  *  */ 
 export const cookiesConsent = async (page) => {
-  await page.evaluate(() => {
-    const buttons = [...document.querySelectorAll('button')];
-    const acceptButton = buttons.find(el => el.textContent === 'Aceptar todas' || el.textContent === 'Accept All');
-    acceptButton?.click();
-  });
-  // Wait to count as clicked
-  await page.waitForTimeout(1000);
+    console.log('Accepting cookies consent...');
+    await page.evaluate(() => {
+        const buttons = [...document.querySelectorAll('button')];
+        const acceptButton = buttons.find(el => el.textContent === 'Aceptar todas' || el.textContent === 'Accept All');
+        acceptButton?.click();
+    });
+    // Wait to count as clicked
+    await page.waitForTimeout(1000);
 }
 
 
@@ -60,13 +61,13 @@ export const cookiesConsent = async (page) => {
  * Method to not save login info / dismiss notifications
  * @param page
  *  */ 
- export const rejectConsent = async (page) => {
-  await page.evaluate(() => {
-    const buttons = [...document.querySelectorAll('button')];
-    const acceptButton = buttons.find(el => el.textContent === 'Not now' || el.textContent === 'Ahora no');
-    acceptButton?.click();
-  });
-  // Wait to count as clicked
-  await page.waitForTimeout(1000);
+export const rejectConsent = async (page) => {
+    await page.evaluate(() => {
+        const buttons = [...document.querySelectorAll('button')];
+        const acceptButton = buttons.find(el => el.textContent === 'Not now' || el.textContent === 'Ahora no');
+        acceptButton?.click();
+    });
+    // Wait to count as clicked
+    await page.waitForTimeout(1000);
 }
 
