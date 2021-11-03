@@ -54,3 +54,19 @@ export const cookiesConsent = async (page) => {
   // Wait to count as clicked
   await page.waitForTimeout(1000);
 }
+
+
+/**
+ * Method to not save login info / dismiss notifications
+ * @param page
+ *  */ 
+ export const rejectConsent = async (page) => {
+  await page.evaluate(() => {
+    const buttons = [...document.querySelectorAll('button')];
+    const acceptButton = buttons.find(el => el.textContent === 'Not now' || el.textContent === 'Ahora no');
+    acceptButton?.click();
+  });
+  // Wait to count as clicked
+  await page.waitForTimeout(1000);
+}
+

@@ -1,7 +1,7 @@
 import { getUserData, login } from './insta.js';
 
 import appConstants from "./appConstants.js";
-import { cookiesConsent } from './Utils.js';
+import { cookiesConsent, rejectConsent } from './Utils.js';
 import csv from "csvtojson";
 import downloadAll from './imageDownload.js'
 import fs from 'fs';
@@ -24,8 +24,15 @@ import puppeteer from 'puppeteer';
   // Accept cookies consent
   await cookiesConsent(page);
 
+
   // Log in
   await login(page);
+
+  //Don't save logIn
+  //await rejectConsent(page);
+
+  //Turn off notifications
+  //await rejectConsent(page);
 
   const users = await csv().fromFile(appConstants.influencers);
 
