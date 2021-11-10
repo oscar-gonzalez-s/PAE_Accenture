@@ -13,6 +13,7 @@ export const login = async (page) => {
     await page.type('[name="password"]', appConstants.instagramAccount.password);
     await page.click('[type="submit"]'),
     await page.waitForNavigation({ waitUntil: 'networkidle0' })
+    console.log(`Logged in with user ${appConstants.instagramAccount.username}`);
 }
 
 /**
@@ -22,8 +23,9 @@ export const login = async (page) => {
  * @param gender
  *  */ 
 export const getUserData = async (page, user, gender) => {
+    console.log(`Getting ${user} data...`);
+    
     const output = [];
-
     const now = dayjs();
     const dateLimit = now.subtract("1", "week");
     dayjs.extend(isBetween);
@@ -37,7 +39,7 @@ export const getUserData = async (page, user, gender) => {
         const data = await getPostData(page, post, { followers, user, gender });
 
         if (!data) {
-            console.log('Image not found. Post is probably a video');
+            console.log('   Image not found. Post is probably a video');
             continue;
         } else if (!dayjs(data.date).isBetween(dateLimit, now)) {
             break;

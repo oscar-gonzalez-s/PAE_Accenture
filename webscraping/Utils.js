@@ -14,10 +14,8 @@ export const updateOutput = async (data, path) => {
   
     Object.assign(json, data)
 
-    fs.writeFile(path, JSON.stringify(json, null, 4), 'utf8', (err) => {
-        if (err) throw err;
-        console.log('JSON file generated. Closing browser...');
-    });
+    await fs.promises.writeFile(path, JSON.stringify(json, null, 4), 'utf8');
+    console.log('JSON file generated. Closing browser...');
 }
 
 /**
@@ -31,13 +29,10 @@ export const updateMediaOutput = async (data, path, user) => {
   
     if (data?.length) {
         json.output.push(...data);
-
-        fs.writeFile(path, JSON.stringify(json, null, 4), 'utf8', (err) => {
-            if (err) throw err;
-            console.log(`JSON file updated with user ${user}`);
-        });
+        await fs.promises.writeFile(path, JSON.stringify(json, null, 4), 'utf8');
+        console.log(`   JSON file updated with user ${user}`);
     } else {
-        console.log(`User ${user} has no data or doesn't exist`);
+        console.log(`   User ${user} has no data or doesn't exist`);
     }
 }
 
@@ -46,7 +41,7 @@ export const updateMediaOutput = async (data, path, user) => {
  * @param page
  *  */ 
 export const cookiesConsent = async (page) => {
-    console.log('Accepting cookies consent...');
+    console.log('Accepting cookies consent');
     await page.evaluate(() => {
         const buttons = [...document.querySelectorAll('button')];
         const acceptButton = buttons.find(el => el.textContent === 'Aceptar todas' || el.textContent === 'Accept All');
