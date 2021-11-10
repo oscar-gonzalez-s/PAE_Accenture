@@ -8,8 +8,8 @@ const appConstants = {
     labels: './assets/labels.csv',
     influencers: './assets/influencers.csv',
     instagramAccount: {
-        username: 'pae.accenture',
-        password: 'paeaccenture'
+        username: 'smartrend.pae',
+        password: 'accenture'
     }
 }
 

@@ -25,7 +25,7 @@ export const getUserData = async (page, user, gender) => {
     const output = [];
 
     const now = dayjs();
-    const dateLimit = now.subtract("2", "week");
+    const dateLimit = now.subtract("1", "week");
     dayjs.extend(isBetween);
     
     await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'networkidle0' });
@@ -36,14 +36,15 @@ export const getUserData = async (page, user, gender) => {
     for (let post of postList) {
         const data = await getPostData(page, post, { followers, user, gender });
 
-        if (data) {
-            if (dayjs(data.date).isBetween(dateLimit, now)) {
-                data.date = dayjs(data.date).format('DD/MM/YYYY');
-                output.push(data);
-            } else {
-                break;
-            }
+        if (!data) {
+            console.log('Image not found. Post is probably a video');
+            continue;
+        } else if (!dayjs(data.date).isBetween(dateLimit, now)) {
+            break;
         }
+
+        data.date = dayjs(data.date).format('DD/MM/YYYY');
+        output.push(data);
     }
 
     await updateMediaOutput(output, appConstants.mediaOutput, user);
@@ -57,10 +58,10 @@ export const getUserData = async (page, user, gender) => {
  *  */ 
 const getPostData = async (page, src, additionalData) => {
 
-    await page.goto(src, { waitUntil: 'domcontentloaded' });
+    await page.goto(src, { waitUntil: 'networkidle0' });
 
     const output = await page.evaluate(() => {
-        const imageSrc = document.querySelector(".KL4Bh img")?.src;
+        const imageSrc = document.querySelector(".ltEKP .KL4Bh img")?.src;
         const likes = document.querySelector('.zV_Nj span')?.textContent?.replace(/[,.]/g, '');
         const date = document.querySelector('time')?.dateTime;
 
