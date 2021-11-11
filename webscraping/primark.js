@@ -1,44 +1,25 @@
 export default async function primark(page, label) {
 
-    let gen = label.gender.trim();
-    let pren = label.prendas.trim().replace(/ +/g, "+");
+  let gen = label.gender.trim() === 'hombre' ? 'mens' : 'womens';
+  let pren = label.prendas.trim().replace(/ +/g, '+');
+    
+  await page.goto(
+    `https://www.primark.com/search?q=${pren}%3Arelevance%3AnextToRootCategoryName%3A${gen}`,
+    { waitUntil: 'networkidle0'}
+  );
 
-    if (gen == "hombre") {
-        gen = "mens";
-    } else if (gen == "mujer") {
-        gen = "womens";
-    }
+  const outputList = await page.evaluate(() => {
+    const productList = [...document.querySelectorAll('.product-listing__list > li')];
 
-    await page.goto(
-        `https://www.primark.com/search?q=${pren}%3Arelevance%3AnextToRootCategoryName%3A${gen}`,
-        { waitUntil: "networkidle0" }
-    );
+    return productList.slice(0, 2).map((product) => {
+      const name = product.querySelector('.product-item__name').textContent.replace(/\n/g, '').trim();
+      const price = product.querySelector('.product-item__price').textContent.replace('€', '').trim();
+      const src = product.querySelector('a').href;
+      const imageSrc = product.querySelector('img').src;
 
-    const outputList = await page.evaluate(() => {
-        const productList = [
-            ...document.querySelectorAll(".component > div > ul > li"), // product-item
-        ];
-
-        return productList.slice(0, 2).map((product) => {
-            const name = product
-                .querySelector(".product-item__name")
-                .textContent.replace(/\n/g, "")
-                .trim();
-            const price = product
-                .querySelector(".product-item__price")
-                .textContent.replace("€", "")
-                .trim();
-            const src = product.querySelector("a").href;
-            const imageSrc = product.querySelector("img").src;
-
-            return {
-                name: name,
-                price: price,
-                src: src,
-                imageSrc: imageSrc,
-            };
-        });
+      return { name, price, src, imageSrc };
     });
+  });
 
-    return outputList;
+  return Object.assign(outputList, { gender: label.gender });
 }
