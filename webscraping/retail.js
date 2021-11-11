@@ -14,17 +14,16 @@ import zara from './zara.js';
 
   const output = { zara: [], primark: [], hm: [], pull: [] };
 
-  // Init browser
   const browser = await puppeteer.launch({ headless: false, devtools: false });
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
 
   const labels = await csv().fromFile(appConstants.labels);
 
-  for (let label of labels) { output.zara.push(...await zara(page, label)); }
-  for (let label of labels) { output.primark.push(...await primark(page, label)); }
-  for (let label of labels) { output.hm.push(...await hm(page, label)); }
-  for (let label of labels) { output.pull.push(...await pull(page, label)); }
+  await Promise.all([
+    ...labels.map(async l => output.zara.push(...await zara(await browser.newPage(), l))),
+    ...labels.map(async l => output.primark.push(...await primark(await browser.newPage(), l))),
+    ...labels.map(async l => output.hm.push(...await hm(await browser.newPage(), l))),
+    ...labels.map(async l => output.pull.push(...await pull(await browser.newPage(), l))),
+  ]);
 
   await updateOutput(output, appConstants.retailOutput);
 

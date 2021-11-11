@@ -12,6 +12,8 @@ node ./webScraping/media &> $dir/media-scraping.txt || { echo "Error: Media scra
 # TODO: Run data processing
 
 # Run retail scraping
-node ./webScraping/retail &> $dir/retail-scraping.txt || { echo "Error: Retail scraping execution failed. Logs at directory $dir"; exit 0; } 
+node ./webScraping/retail &> $dir/retail-scraping.txt || { echo "Error: Retail scraping execution failed. Logs at directory $dir"; exit 0; }
 
-# TODO: Run media upload
+echo Execution completed successfully
+
+exit 1

@@ -5,7 +5,7 @@ export default async function hm(page, label) {
 
   await page.goto(
     `https://www2.hm.com/es_es/search-results.html?q=${pren}&department=${gen}_all&sort=stock&image-size=small&image=stillLife&offset=0&page-size=40`,
-    { waitUntil: 'networkidle0' }
+    { waitUntil: 'networkidle2' }
   );
 
   const outputList = await page.evaluate(() => {

@@ -33,7 +33,7 @@ const downloadFile = async (fileUrl, downloadFolder, imgName) => { // Download a
 
 /**
  * Download all the images of the json file
- * @param path 
+ * @param {string} path 
  */
 
 const downloadAll = async (path) => { 

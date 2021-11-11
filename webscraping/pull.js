@@ -5,7 +5,7 @@ export default async function pull(page, label) {
 
   await page.goto(
     `https://www.pullandbear.com/es/mujer-n6417?q=${pren}&filter=hierarchical_category%3A%22${gen}%22`,
-    { waitUntil: 'networkidle0' }
+    { waitUntil: 'networkidle2' }
   );
 
   const outputList = await page.evaluate(() => {

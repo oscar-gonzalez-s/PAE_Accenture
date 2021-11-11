@@ -2,6 +2,9 @@ import appConstants from './appConstants.js';
 import csv from 'csvtojson';
 import fs from 'fs';
 
+/**
+ * Method to log media output information
+ *  */ 
 export default async function outputAnalyze() {
   const json = await fs.promises.readFile(appConstants.mediaOutput).then(json => JSON.parse(json)).catch(() => {
     throw new Error('Error: media-output file not found');

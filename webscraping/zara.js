@@ -5,7 +5,7 @@ export default async function zara(page, label) {
 
   await page.goto(
     `https://www.zara.com/es/es/search?searchTerm=${pren}&section=${gen}`,
-    { waitUntil: 'networkidle0' }
+    { waitUntil: 'networkidle2' }
   );
 
   const outputList = await page.evaluate(() => {

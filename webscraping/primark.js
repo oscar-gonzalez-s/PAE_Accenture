@@ -5,7 +5,7 @@ export default async function primark(page, label) {
     
   await page.goto(
     `https://www.primark.com/search?q=${pren}%3Arelevance%3AnextToRootCategoryName%3A${gen}`,
-    { waitUntil: 'networkidle0'}
+    { waitUntil: 'networkidle2'}
   );
 
   const outputList = await page.evaluate(() => {

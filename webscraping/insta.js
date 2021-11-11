@@ -30,7 +30,7 @@ export const getUserData = async (page, user, gender) => {
   const dateLimit = now.subtract('1', 'week');
   dayjs.extend(isBetween);
     
-  await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'networkidle0' });
+  await page.goto(`https://www.instagram.com/${user}/`, { waitUntil: 'networkidle2' });
 
   const followers = await page.evaluate(() => document.querySelectorAll('.g47SY')[1]?.title?.replace(/[,.]/g, ''));
   const postList = await page.evaluate(() => [...document.querySelectorAll('.v1Nh3.kIKUG._bz0w')].map(post => post.querySelector('a')?.href));
@@ -60,7 +60,7 @@ export const getUserData = async (page, user, gender) => {
  *  */ 
 const getPostData = async (page, src, additionalData) => {
 
-  await page.goto(src, { waitUntil: 'networkidle0' });
+  await page.goto(src, { waitUntil: 'networkidle2' });
 
   const output = await page.evaluate(() => {
     const imageSrc = document.querySelector('.ltEKP .KL4Bh img')?.src;
