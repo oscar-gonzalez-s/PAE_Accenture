@@ -1,7 +1,7 @@
 #!/bin/bash
 # File that integrates all scripts
 
-dir=./Logs/$(date '+%d-%m-%Y_%Hh-%Mm')
+dir=./logs/$(date '+%d-%m-%Y_%Hh-%Mm')
 mkdir -p $dir
 
 # Run media scraping
