@@ -4,6 +4,7 @@ webscraping/*.json
 !webscraping/.eslintrc.json
 assets/instaImages/*
 assets/*.json
+Logs/**
 
 .DS_Store
 **/.vscode/*

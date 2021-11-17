@@ -10,6 +10,9 @@
     },
     "rules": {
         "no-debugger": "warn",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "quotes": ["warn", "single", "avoid-escape"],
+        "indent": ["warn", 2],
+        "semi": ["error", "always"]
     }
 }
