@@ -14,6 +14,7 @@ Purpose:
 import numpy as np
 import pandas as pd
 import json
+import sys 
 
 """
   confidenceEditor(filename, success_rate, influencer_name) 
@@ -90,16 +91,9 @@ Possible improvements to this function:
 """
 
 def extraxtTelegramStatistics(filename, historyfile): 
-  """Receives .json file from telegram and historical .csv to modify
-     Considers that the information received in filename has not been
-     received before. 
-     telegram-data.json is expected to be: 
-     [{"text": "Si", "voter_count": 2}, {"text": "No", "voter_count": 1}]
-     telegram-history.csv is expected to be:
-     yes_votes, no_votes,	total_votes,	average_yes_proportion
-     
-     Returns the percentage of yes engagement with respect to the mean,
-     this percentage goes from [-1, 1]
+  """Receives .json file from telegram and historical .csv to modify   
+     Returns the percentage of yes engagement with respect to the mean
+     engagement, this percentage goes from [-1, 1]
   """
   # EXTRACT JSON DATA
   #Read .json file 
@@ -165,6 +159,10 @@ Main Programm:
   
   if __name__ == '__main__':
   #These parameters can be reveived by sys on real implementation. 
-  engagement = extraxtTelegramStatistics("telegram-data.json", "telegram-history.csv" )
-  confidenceEditor("influencers.csv", engagement ,"raquelreitx")
+  telegram_data = sys.argv[1] #ex: "telegram-data.json"
+  history_csv = sys.argv[2] #ex: "telegram-history.csv"
+  influencers_csv = sys.argv[3] #ex: "influencers.csv"
+  influencer_name = sys.argv[4] #ex: "raquelreitx"
+  engagement = extraxtTelegramStatistics(telegram_data, history_csv)
+  confidenceEditor(influencers_csv, engagement , influencer_name)
   
