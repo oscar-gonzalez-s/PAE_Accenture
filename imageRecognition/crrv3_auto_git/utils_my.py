@@ -2,7 +2,7 @@
 """
 Created on Sat Jun 22 16:14:17 2019
 
-@author: Wei-Hsiang, Shen
+@author: fonollosa (Berlin)
 """
 
 import numpy as np
@@ -24,9 +24,15 @@ def Draw_Bounding_Box(img, list_obj):
     img_width = img.shape[1]
     img_height = img.shape[0]
 
-    color_yellow = [244/255, 241/255, 66/255]
-    color_green = [66/255, 241/255, 66/255]
-    color_red = [241/255, 66/255, 66/255]
+    # color_yellow = [244/255, 241/255, 66/255]
+    # color_green = [66/255, 241/255, 66/255]
+    # color_red = [241/255, 66/255, 66/255]
+    # color_blue = [66/255, 66/255, 241/255]
+
+    color_yellow = [253/255, 255/255, 50/255]
+    color_green = [140/255, 255/255, 50/255]
+    color_red = [255/255, 7/255, 58/255]
+    color_blue = [13/255, 213/255, 252/255]
 
     # draw rectangle bounding box for cars
     for obj in list_obj:
@@ -35,24 +41,50 @@ def Draw_Bounding_Box(img, list_obj):
         x2 = int(round(obj['x2']*img_width))
         y2 = int(round(obj['y2']*img_height))
 
-        if 'camiseta manga corta' in obj['label']:
+        if 'camiseta_manga_corta' in obj['label']:
             color = color_yellow
         elif 'pantalones' in obj['label'] :
             color = color_red
+        elif 'camiseta_manga_larga' in obj['label'] :
+            color = color_blue
         else:
             color = color_green
+        # if obj['label'] == 'short_sleeve_top':
+        #     color = color_yellow
+        # elif obj['label'] == 'trousers':
+        #     color = color_red
+        # else:
+        #     color = color_green
+                
+        # text = '{}: {:.2f}'.format(obj['label'], obj['confidence'])
+        # img = cv2.rectangle(img, (x1, y1), (x2, y2), color, 4)
+        # img = cv2.putText(img, text, (x1, y1-5), cv2.FONT_HERSHEY_DUPLEX, 0.7, color, 2, cv2.LINE_AA)
+        
+        aux = obj['label'].split(' ')
+        
+        aux2 = aux.copy()
+        aux2.pop(0)
 
-        text = '{}: {:.2f}'.format(obj['label'], obj['confidence'])
+        #text = '{}: {:.2f}'.format(obj['label'], obj['confidence'])
 
-        # draw bounding box and labels
-        letter_size = 15
+        text = '{} ({:.2f}) {}'.format(aux[0], obj['confidence'], ' '.join(aux2))
 
-        if (len(obj['label'])*letter_size < (x2-x1)):
-            x = x1
+        # draw bounding box and centered labels
+        letter_size = 12
+        box_length = x2-x1
+        label_length = len(text)*letter_size
+
+        if (label_length < box_length):
+            x = x1+int((box_length-label_length)/2)
         else:
-            x = x1-int(0.25*letter_size*len(obj['label']))
+        #    x = x1-int(0.25*letter_size*len(text))
+            x = x1-int((label_length-box_length)/2)
+        
+        
         img = cv2.rectangle(img, (x1, y1), (x2, y2), color, 4)
         img = cv2.putText(img, text, (x, y1-10), cv2.FONT_HERSHEY_DUPLEX, 0.7, color, 2, cv2.LINE_AA)
+
+        
 
     return img
 

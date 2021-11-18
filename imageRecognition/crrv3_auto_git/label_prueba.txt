@@ -1,112 +1,24 @@
 
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
+103.jpg
+pantalon_corto
+negro
+N/A
+N/A
+
+101.jpg
+N/A
+N/A
+N/A
+N/A
 
 alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Light Taupe
-
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Beaver
+camiseta_manga_corta
+verde oscuro
+pantalon_corto
+beige
 
 1.jpg
 pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Light Taupe
-
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Light Taupe
-
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Beaver
-
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Light Taupe
-
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Light Taupe
-
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Beaver
-
-1.jpg
-pantalones
-Dark Jungle Green
-camiseta manga larga
-Licorice
-
-alex2.jpg
-camiseta manga corta
-Medium Jungle Green
-pantalon corto
-Light Taupe
-
-1.jpg
-
-alex2.jpg
+negro
+camiseta_manga_larga
+negro
