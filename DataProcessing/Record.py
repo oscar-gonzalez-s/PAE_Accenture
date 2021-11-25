@@ -88,12 +88,6 @@ def actualizeRecord(df_item0_m, df_item1_m, df_item0_w, df_item1_w, pathItems, p
   Returns: 
     This function does not return anything. It updates the csv file that contains the record
   """
-
-  #df_item0_w = getPossibleTrend(df_w,'item0')
-  #df_item1_w = getPossibleTrend(df_w,'item1')
-  #df_item0_m = getPossibleTrend(df_m,'item0')
-  #df_item1_m = getPossibleTrend(df_m,'item1')
-
   dfTrends = pd.read_csv(pathItems)
 
   df_item0_m = df_item0_m.set_index("item")
