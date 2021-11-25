@@ -39,6 +39,19 @@ Possible improvements to this function:
     in #times emergence (meaning success in trend prediction). 
 """
 
+def ScoreUtils(df):
+  """
+  Main Programm: 
+  """
+  #These parameters can be reveived by sys on real implementation. 
+  telegram_data = sys.argv[1] #ex: "telegram-data.json"
+  history_csv = sys.argv[2] #ex: "telegram-history.csv"
+  influencers_csv = sys.argv[3] #ex: "influencers.csv"
+  influencer_name = sys.argv[4] #ex: "raquelreitx"
+  engagement = extraxtTelegramStatistics(telegram_data, history_csv)
+  confidenceEditor(influencers_csv, engagement , influencer_name)
+  
+
 def confidenceEditor (filename, success_rate, influencer_name):
   """Receives a csv (filename), an influencer name and the 
      percentage in which the score of the influencer must be
@@ -151,18 +164,3 @@ def extraxtTelegramStatistics(filename, historyfile):
   engagement = actualyesprop/pastyesprop-1 
   return engagement
 
-
-  
-"""
-Main Programm: 
-"""
-  
-  if __name__ == '__main__':
-  #These parameters can be reveived by sys on real implementation. 
-  telegram_data = sys.argv[1] #ex: "telegram-data.json"
-  history_csv = sys.argv[2] #ex: "telegram-history.csv"
-  influencers_csv = sys.argv[3] #ex: "influencers.csv"
-  influencer_name = sys.argv[4] #ex: "raquelreitx"
-  engagement = extraxtTelegramStatistics(telegram_data, history_csv)
-  confidenceEditor(influencers_csv, engagement , influencer_name)
-  

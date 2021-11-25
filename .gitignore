@@ -5,6 +5,7 @@ webscraping/*.json
 assets/instaImages/*
 assets/*.json
 Logs/**
+*/__pycache__/**
 
 .DS_Store
 **/.vscode/*

@@ -3,6 +3,37 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 
+def DataExtraction(recognitionOutput, influencers):
+  """ Main DataExtraction function
+
+  Params: 
+
+    - recognitionOutput 
+    - influencers
+  
+  Returns: 
+
+    - df: Posts dataFrame
+    - df_item0_w = Top woman clothing item dataFrame with counts and valid flag
+    - df_item1_w = Bottom woman clothing item dataFrame with counts and valid flag
+    - df_item0_m = Top male clothing item dataFrame with counts and valid flag
+    - df_item1_m = Bottom male clothing item dataFrame with counts and valid flag
+  """
+  #Get the general Dataframe
+  df = getGeneralDataframe(recognitionOutput, influencers)
+  
+  #Split the general Dataframe by gender
+  df_w= getFilteredDataframe(df,"WOMAN")
+  df_m= getFilteredDataframe(df,"MAN")
+
+  #Get a dataframe with the item types, number of aparitions of the item and it is in the top part of the histogram or not
+  df_item0_w = getPossibleTrend(df_w,'item0')
+  df_item1_w = getPossibleTrend(df_w,'item1')
+  df_item0_m = getPossibleTrend(df_m,'item0')
+  df_item1_m = getPossibleTrend(df_m,'item1')
+
+  return df, df_item0_m, df_item1_m, df_item0_w, df_item1_w
+
 def getGeneralDataframe(jsonPath, csvPath):
   """ Funcion to obtain a dataFrame with the data of the Json file
       Parameters: json path """
@@ -78,23 +109,10 @@ def getPossibleTrend(df,item):
 
   return df_item
 
-if __name__ == "__main__":
-  
-  #Get the general Dataframe
-  df = getGeneralDataframe("recognition-output.json", "influencers.csv")
-  
-  #Split the general Dataframe by gender
-  df_w= getFilteredDataframe(df,"WOMAN")
-  df_m= getFilteredDataframe(df,"MAN")
+def showResults(df_w, df_m):
+  """ Show a histogram for the top and bottom items of each gender """
 
-  #Get a histogram for the top and bottom items of each gender
   getHistogram(df_w,'item0',"Woman top items histogram")
   getHistogram(df_w,'item1',"Woman bottom items histogram")
   getHistogram(df_m,'item0',"Man top items histogram")
   getHistogram(df_m,'item1',"Man bottom items histogram")
-
-  #Get a dataframe with the item types, number of aparitions of the item and it is in the top part of the histogram or not
-  df_item0_w = getPossibleTrend(df_w,'item0')
-  df_item1_w = getPossibleTrend(df_w,'item1')
-  df_item0_m = getPossibleTrend(df_m,'item0')
-  df_item1_m = getPossibleTrend(df_m,'item1')
