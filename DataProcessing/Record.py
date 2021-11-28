@@ -83,7 +83,7 @@ def actualizeRecord(df_item0_m, df_item1_m, df_item0_w, df_item1_w, pathItems, p
     - df_item0_w = Top male clothing item dataFrame with counts and valid flag
     - df_item1_w = Bottom male clothing item dataFrame with counts and valid flag
     - pathItems = the path of the csv that contains the 4 trending items
-    - pathRecord = the path of the csv that contains the Record of the trending items ( the first time this file MUST be created and only contains two headers: item,gender)
+    - pathRecord = the path of the csv that contains the Record of the trending items ( the first time this file MUST be created and only contains three headers: item,gender,influencers)
   
   Returns: 
     This function does not return anything. It updates the csv file that contains the record
@@ -113,16 +113,16 @@ def actualizeRecord(df_item0_m, df_item1_m, df_item0_w, df_item1_w, pathItems, p
   dfRecord.loc[dfRecord.shape[0]] = np.zeros(cols)
 
   #calculate new items percentage of aparition 
-  percentatge1 = round(df_item0_m.loc[dfTrends["prendas"][0]].counts/sum(df_item0_m["counts"]),4)
-  percentatge2 = round(df_item1_m.loc[dfTrends["prendas"][1]].counts/sum(df_item1_m["counts"]),4)
-  percentatge3 = round(df_item0_w.loc[dfTrends["prendas"][2]].counts/sum(df_item0_w["counts"]),4)
-  percentatge4 = round(df_item1_w.loc[dfTrends["prendas"][3]].counts/sum(df_item1_w["counts"]),4)
+  percentatge1 = round(df_item0_m.loc[dfTrends["item"][0]].counts/sum(df_item0_m["counts"]),4)
+  percentatge2 = round(df_item1_m.loc[dfTrends["item"][1]].counts/sum(df_item1_m["counts"]),4)
+  percentatge3 = round(df_item0_w.loc[dfTrends["item"][2]].counts/sum(df_item0_w["counts"]),4)
+  percentatge4 = round(df_item1_w.loc[dfTrends["item"][3]].counts/sum(df_item1_w["counts"]),4)
 
   # write the new items record
-  dfRecord.loc[leng, ['item', 'gender', today]] =   [dfTrends["prendas"][0],dfTrends["gender"][0],percentatge1]
-  dfRecord.loc[leng+1, ['item', 'gender', today]] = [dfTrends["prendas"][1],dfTrends["gender"][1],percentatge2]
-  dfRecord.loc[leng+2, ['item', 'gender', today]] = [dfTrends["prendas"][2],dfTrends["gender"][2],percentatge3]
-  dfRecord.loc[leng+3, ['item', 'gender', today]] = [dfTrends["prendas"][3],dfTrends["gender"][3],percentatge4]
+  dfRecord.loc[leng, ['item', 'gender', 'influencers', today]] =   [dfTrends["item"][0],dfTrends["gender"][0],dfTrends["influencers"][0],percentatge1]
+  dfRecord.loc[leng+1, ['item', 'gender', 'influencers', today]] = [dfTrends["item"][1],dfTrends["gender"][1],dfTrends["influencers"][1],percentatge2]
+  dfRecord.loc[leng+2, ['item', 'gender', 'influencers', today]] = [dfTrends["item"][2],dfTrends["gender"][2],dfTrends["influencers"][2],percentatge3]
+  dfRecord.loc[leng+3, ['item', 'gender', 'influencers', today]] = [dfTrends["item"][3],dfTrends["gender"][3],dfTrends["influencers"][3],percentatge4]
 
   #fill the old items actual record with their percentage of apparition in the new trend
   for i in range (leng):
