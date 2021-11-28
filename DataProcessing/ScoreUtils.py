@@ -86,7 +86,7 @@ Receives:
     [{"text": "Si", "voter_count": 2, "item": "camiseta roja", "gender": "WOMAN"}, {"text": "No", "voter_count": 1, "item": "camiseta roja", "gender": "WOMAN"}]
   - historical .csv where survey results from past weeks are stored. Must
     be this shape: 
-    [item, yes_votes, no_votes,	total_votes, average_yes_proportion]
+    [item, gender, yes_votes, no_votes,	total_votes, average_yes_proportion]
 
 Returns: 
   - percentage of yes engagement with respect to the mean, this percentage
@@ -102,7 +102,9 @@ Assumptions:
     as telegram posts are posted. 
     
 Possible improvements to this function:
-  - None on the horizon. 
+  - For now, mean engagement is calculated with both women and men posts. Possible
+    improvement could include calculating mean engagement for women's and men's
+    posts separately. 
 """
 
 def extraxtTelegramStatistics(filename, historyfile): 
@@ -114,7 +116,7 @@ def extraxtTelegramStatistics(filename, historyfile):
      telegram-history.csv is expected to be:
      gender, item, yes_votes, no_votes,	total_votes,	average_yes_proportion
      
-     Returns the percentage of yes engagement with respect to the mean, and taking into account 
+     Returns the percentage of yes engagement with respect to the mean, not taking into account 
      the gender. This percentage goes from [-1, 1]
   """
   # EXTRACT JSON DATA
