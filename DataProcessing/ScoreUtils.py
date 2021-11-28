@@ -167,7 +167,7 @@ def extraxtTelegramStatistics(filename, historyfile):
 """
   influencerHas(dataframe, item)
 Receives:
-  - dataframe obtained from recognition-output.json file.
+  - dataframe obtained from recognition-output.json file, filtered by gender. 
   - item that will be searched in the influencers pictures.
   
 Returns: 
