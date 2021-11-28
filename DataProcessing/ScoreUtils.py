@@ -238,3 +238,54 @@ def influencerHas (dataframe, item):
   influencers = list(set(influencers))
   return influencers
 
+"""
+  predictorEditor(phistorypath, infilepath, nweeks)
+Receives:
+  - .csv file containing at least 4 columns: |item, instagrammer gender, instagrammer list, date0|, date1, date2 ... 
+    instagrammer list: list of influencers that displayed the item on the first date0. 
+  - .csv file containing the list of influencers, their gender and their score.  
+  - nweeks: parameter that determines how many weeks are taken into account for following trend evolution.
+    default value is nweeks=3. 
+  - relevance: 1-relevance is the ponderation of the historical prediction in the score calculus
+
+Returns:
+  - modifyed infilepath.csv: modifyes score if number of appereances of the item have increased/decreased
+    through a nweeks window period. 
+
+Assumptions:
+  - None remarkable for the moment.
+
+Possible improvements to this function: 
+  - See if there's a new instagrammer, if so, add it to the list.
+
+"""
+
+def predictorEditor(phistorypath, infilepath, nweeks, relevance): 
+  # Reading the prediction history csv file
+  df_phist = pd.read_csv(phistorypath)
+  # Look at which rows have more than 4 columns, these are the only ones
+  # we are interested in. 
+  nonfreecolumns = df_phist.apply(lambda x: x.notnull().sum(), axis='columns')
+  print(nonfreecolumns)
+  indexes = []
+  count=0; 
+  for i in range(len(nonfreecolumns)):
+    if nonfreecolumns[i] >4 and nonfreecolumns[i] <(4+nweeks): 
+      indexes.append([])
+      indexes[count].append(i)
+      indexes[count].append(nonfreecolumns[i])
+      count+=1
+  #indexes[x][y] -> x: row that interests us, y:#columns filled for that row
+    #for each row, aka item, we're interested in
+  for position in indexes: 
+    #position[0] -> row
+    #position[1] -> column 
+    actual_percent = float(df_phist.iloc[position[0],(position[1]-1)])/100
+    precedent_percent = float(df_phist.iloc[position[0],(position[1]-2)].astype(int))/100
+    #percentage in which influencer score must vary
+    variation = actual_percent - precedent_percent
+    #extract influencers whose percent must vary 
+    inf = df_phist.iloc[position[0],2].split(';')
+    #make percent vary 
+    for influencer_name in inf:
+      ConfidenceEditor(infilepath, variation*(1-relevance), influencer_name)
