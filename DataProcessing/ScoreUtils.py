@@ -17,7 +17,7 @@ import json
 import sys 
 
 """
-def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phistorypath, dataframe, relevance): 
+def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phistorypath, dataframe, relevance, nweeks): 
   #Main Programm:
     Score must be updated every time either: 
       - A prediction-history file is updated.  
@@ -58,7 +58,6 @@ def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phist
   #DONE
   if upd_phist == True:
     #update score based on historical data prediction
-    #Look for all influencers that wore this item, put them on a list
     predictorEditor(phistorypath, infilepath, nweeks, relevance)
     
 
