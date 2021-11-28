@@ -54,7 +54,7 @@ def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phist
     influencers = influencerHas(df, item)
     #loop through all influencers, updating their score based on the engagement and the relevance parameter
     for influencer_name in influencers: 
-      ConfidenceEditor (infilepath, engagement*relevance, influencer_name)
+      confidenceEditor (infilepath, engagement*relevance, influencer_name)
   #DONE
   if upd_phist == True:
     #update score based on historical data prediction
@@ -297,4 +297,4 @@ def predictorEditor(phistorypath, infilepath, nweeks, relevance):
     inf = df_phist.iloc[position[0],2].split(';')
     #make percent vary 
     for influencer_name in inf:
-      ConfidenceEditor(infilepath, variation*(1-relevance), influencer_name)
+      confidenceEditor(infilepath, variation*(1-relevance), influencer_name)
