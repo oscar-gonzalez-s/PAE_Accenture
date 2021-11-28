@@ -106,26 +106,39 @@ Possible improvements to this function:
 """
 
 def extraxtTelegramStatistics(filename, historyfile): 
-  """Receives .json file from telegram and historical .csv to modify   
-     Returns the percentage of yes engagement with respect to the mean
-     engagement, this percentage goes from [-1, 1]
+  """Receives .json file from telegram and historical .csv to modify
+     Considers that the information received in filename has not been
+     received before. 
+     telegram-data.json is expected to be: 
+     [{"text": "Si", "voter_count": 2, "item": "camiseta roja", "gender": }, {"text": "No", "voter_count": 1, "item": "camiseta roja"}]
+     telegram-history.csv is expected to be:
+     gender, item, yes_votes, no_votes,	total_votes,	average_yes_proportion
+     
+     Returns the percentage of yes engagement with respect to the mean, and taking into account 
+     the gender. This percentage goes from [-1, 1]
   """
   # EXTRACT JSON DATA
   #Read .json file 
   with open(filename) as f:
     data = json.load(f)
 
-  #Create data frame 
-  df = pd.DataFrame(columns=["text", "voter_count"])
+  #Create data frame
+  df = pd.DataFrame(columns=["text", "voter_count", "item", "gender"])
 
-  #Put data into dataframe 
+  #Put data into dataframe
   for i in range(0,len(data)):
-    # i=0 Yes votes 
-    # i=1 No votes 
-    df.loc[i] = [data[i]["text"], data[i]["voter_count"]]
+    # i=0 Yes votes
+    # i=1 No votes
+    df.loc[i] = [data[i]["text"], data[i]["voter_count"], data[i]["item"], data[i]["gender"]]
 
-  #Change the type of variables string to int 
+  #Change the type of variables string to int
   df['voter_count']=df['voter_count'].astype(int)
+
+  #Extract item
+  item = df.loc[0][2]
+  
+  #Extract gender
+  gender = df.loc[0][3]
 
   #Count total votes
   total_votes = 0
@@ -140,13 +153,17 @@ def extraxtTelegramStatistics(filename, historyfile):
   nsurveys = pd.read_csv(historyfile, usecols=[0])
   nsurveys = nsurveys.values.shape[0]
     #Add data from new survey 
+      #Add item 
+  dfv.loc[nsurveys, 'item'] = item
+      #Add gender
+  dfv.loc[nsurveys, 'gender'] = gender
       #Add yes votes
-  dfv.loc[nsurveys, 'yes_votes'] = df.loc[0][1];
+  dfv.loc[nsurveys, 'yes_votes'] = df.loc[0][1]
       #Add no votes 
-  dfv.loc[nsurveys, 'no_votes'] = df.loc[1][1];
+  dfv.loc[nsurveys, 'no_votes'] = df.loc[1][1]
       #Add total votes 
-  dfv.loc[nsurveys, 'total_votes'] = total_votes;
-    #Recompute average yes proportion
+  dfv.loc[nsurveys, 'total_votes'] = total_votes
+    #Recompute average yes proportion ignoring gender
   actualyesprop = df.loc[0][1]/total_votes
   if nsurveys > 1: 
     pastyesprop = dfv.loc[nsurveys-1, 'average_yes_proportion']
@@ -154,6 +171,7 @@ def extraxtTelegramStatistics(filename, historyfile):
   else: 
     newyesprop = actualyesprop
     pastyesprop = actualyesprop
+
     #Modify average yes proportion 
   dfv.loc[nsurveys, 'average_yes_proportion'] = newyesprop;
 
@@ -164,7 +182,8 @@ def extraxtTelegramStatistics(filename, historyfile):
   print("Actual = ", actualyesprop)
   print("Past = ", pastyesprop)
   engagement = actualyesprop/pastyesprop-1 
-  return engagement
+  return engagement, item, gender
+
 
 """
   influencerHas(dataframe, item)
