@@ -164,6 +164,22 @@ def extraxtTelegramStatistics(filename, historyfile):
   engagement = actualyesprop/pastyesprop-1 
   return engagement
 
+"""
+  influencerHas(dataframe, item)
+Receives:
+  - dataframe obtained from recognition-output.json file.
+  - item that will be searched in the influencers pictures.
+  
+Returns: 
+  - list of the influencers that have worn the selected item on the pictures
+  analysed that week, portrayed in recognition-output.json file.
+    
+Assumptions: 
+  - None remarkable 
+  
+Possible improvements to this function:
+  - None.
+"""
 
 def influencerHas (dataframe, item): 
   """Returns a list of the influencers who have been seen wearing 'item'."""
