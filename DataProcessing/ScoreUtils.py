@@ -17,6 +17,42 @@ import json
 import sys 
 
 """
+def ScoreUtils(df): 
+  #Test for Main Programm:
+  #These parameters can be reveived by sys on real implementation. 
+  telegram_data = sys.argv[1] #ex: "telegram-data.json"
+  history_csv = sys.argv[2] #ex: "telegram-history.csv"
+  influencers_csv = sys.argv[3] #ex: "influencers.csv"
+  influencer_name = sys.argv[4] #ex: "raquelreitx"
+"""
+  
+def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phistorypath, dataframe, relevance): 
+  """
+  Main Programm
+  """
+  # telfilepath= "path/telegram-data.json", infilepath="path/influencers.csv", thistorypath = "path/telegram-history.csv", phistorypath = "path/prediction-history.csv"
+  #DONE 
+  if gen_tel == True: 
+    #update score based on telegram post
+    #Compute engagement for the item of the telegram post
+    engagement, item, gender = extraxtTelegramStatistics(telfilepath, thistorypath)
+    #Look for all influencers that wore this item, put them on a list
+    #filtrate by gender first 
+    if gender == "WOMAN":
+      df = getFilteredDataframe(df,"WOMAN")
+    elif gender == "MAN": 
+      df = getFilteredDataframe(df,"MAN")
+    influencers = influencerHas(df, item)
+    #loop through all influencers, updating their score based on the engagement and the relevance parameter
+    for influencer_name in influencers: 
+      ConfidenceEditor (infilepath, engagement*relevance, influencer_name)
+  #TODO
+  if upd_phist == True:
+    #update score based on historical data prediction
+    #Look for all influencers that wore this item, put them on a list
+    None 
+
+"""
   confidenceEditor(filename, success_rate, influencer_name) 
 Receives:
   - .csv file containing 3 columns: instagrammer name, instagrammer gender, instagrammer score. 
@@ -38,19 +74,6 @@ Possible improvements to this function:
     ensuring if the item selected as trend has experienced an increase
     in #times emergence (meaning success in trend prediction). 
 """
-
-def ScoreUtils(df):
-  """
-  Main Programm: 
-  """
-  #These parameters can be reveived by sys on real implementation. 
-  telegram_data = sys.argv[1] #ex: "telegram-data.json"
-  history_csv = sys.argv[2] #ex: "telegram-history.csv"
-  influencers_csv = sys.argv[3] #ex: "influencers.csv"
-  influencer_name = sys.argv[4] #ex: "raquelreitx"
-  engagement = extraxtTelegramStatistics(telegram_data, history_csv)
-  confidenceEditor(influencers_csv, engagement , influencer_name)
-  
 
 def confidenceEditor (filename, success_rate, influencer_name):
   """Receives a csv (filename), an influencer name and the 
