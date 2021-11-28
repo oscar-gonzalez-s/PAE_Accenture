@@ -83,15 +83,17 @@ def confidenceEditor (filename, success_rate, influencer_name):
 Receives:
   - .json file from telegram, containing the results of the 
     survey of the week, must have this shape: 
-    [{"text": "Si", "voter_count": 2}, {"text": "No", "voter_count": 1}]
+    [{"text": "Si", "voter_count": 2, "item": "camiseta roja", "gender": "WOMAN"}, {"text": "No", "voter_count": 1, "item": "camiseta roja", "gender": "WOMAN"}]
   - historical .csv where survey results from past weeks are stored. Must
     be this shape: 
-    [yes_votes, no_votes,	total_votes,	average_yes_proportion]
+    [item, yes_votes, no_votes,	total_votes, average_yes_proportion]
 
 Returns: 
   - percentage of yes engagement with respect to the mean, this percentage
     goes from [-1, 1]. This percentage will go directly to modify the 
     instagrammer score. 
+  - The item that has achieved this engagement.
+  - The gender to which this item is associated. 
     
 Assumptions: 
   - Information received in the .json file must have not been received before.
