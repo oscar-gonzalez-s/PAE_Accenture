@@ -17,19 +17,28 @@ import json
 import sys 
 
 """
-def ScoreUtils(df): 
-  #Test for Main Programm:
-  #These parameters can be reveived by sys on real implementation. 
-  telegram_data = sys.argv[1] #ex: "telegram-data.json"
-  history_csv = sys.argv[2] #ex: "telegram-history.csv"
-  influencers_csv = sys.argv[3] #ex: "influencers.csv"
-  influencer_name = sys.argv[4] #ex: "raquelreitx"
+def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phistorypath, dataframe, relevance): 
+  #Main Programm:
+    Score must be updated every time either: 
+      - A prediction-history file is updated.  
+      - A telegram file for a survey is generated. 
+
+    **Bash variables** 
+    > UPD_PHIST = True #set to true when prediction-history file is updated.
+    > GEN_TEL = True #set to true when telegram file for a survey is generated.
+    > RELEVANCE = [0,1] -> determines the relevance that Telegram results have on the calculus of the influencer score. 
+
+  #These parameters can be reveived by sys on real implementation.
+    #upd_phist = sys.argv[1]
+    #gen_tel = sys.argv[2]
+    #telfilepath = sys.argv[3]    #"path/telegram-data.json"
+    #infilepath = sys.argv[4]     #"path/influencers.csv"
+    #thistorypath = sys.argv[5]   #"path/telegram-history.csv"
+    #phistorypath = sys.argv[6]   #"path/prediction-history.csv"
+    
 """
   
 def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phistorypath, dataframe, relevance): 
-  """
-  Main Programm
-  """
   # telfilepath= "path/telegram-data.json", infilepath="path/influencers.csv", thistorypath = "path/telegram-history.csv", phistorypath = "path/prediction-history.csv"
   #DONE 
   if gen_tel == True: 
@@ -46,11 +55,12 @@ def updateScore(upd_phist, gen_tel, telfilepath, infilepath, thistorypath, phist
     #loop through all influencers, updating their score based on the engagement and the relevance parameter
     for influencer_name in influencers: 
       ConfidenceEditor (infilepath, engagement*relevance, influencer_name)
-  #TODO
+  #DONE
   if upd_phist == True:
     #update score based on historical data prediction
     #Look for all influencers that wore this item, put them on a list
-    None 
+    predictorEditor(phistorypath, infilepath, nweeks, relevance)
+    
 
 """
   confidenceEditor(filename, success_rate, influencer_name) 
