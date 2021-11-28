@@ -164,3 +164,15 @@ def extraxtTelegramStatistics(filename, historyfile):
   engagement = actualyesprop/pastyesprop-1 
   return engagement
 
+
+def influencerHas (dataframe, item): 
+  """Returns a list of the influencers who have been seen wearing 'item'."""
+  influencers = []
+  #Look for all influencers that had this item on dataframe, put them on a list
+  for i in range(len(dataframe['user'])):
+    if (item == dataframe['item0'][i] or item == dataframe['item1'][i]):
+      influencers.append(dataframe['user'][i])
+  #Delete repeated elements from the list, distorted order is not important
+  influencers = list(set(influencers))
+  return influencers
+
