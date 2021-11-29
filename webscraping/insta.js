@@ -70,5 +70,5 @@ const getPostData = async (page, src, additionalData) => {
     return { likes, date, imageSrc };
   });
     
-  return output.imageSrc ? Object.assign(output, additionalData) : null;
+  return (output.imageSrc && output.likes) ? Object.assign(output, additionalData) : null;
 };
