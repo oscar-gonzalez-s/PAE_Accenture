@@ -10,8 +10,7 @@ if __name__ == "__main__":
     """ Main Data Processing Programm
     """
     # PARAMETERS
-    # boolean to indicate if items-record.csv has been updated
-    update_predictionHistory
+    # update_predictionHistory: boolean to indicate if items-record.csv has been updated
     # boolean to indicate if a telegram-data.json has been generated
     generate_telegramHistory = sys.argv[1]
     recognitionOutput = sys.argv[2]  # path to recognition-output.json
