@@ -21,5 +21,5 @@ export default async function hm(page, label) {
     });
   });
 
-  return Object.assign(outputList, { gender: label.gender });
+  return outputList.map(item => Object.assign(item, { gender: label.gender }));
 }
