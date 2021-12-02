@@ -1,3 +1,7 @@
+/**
+ * Script that integrates the retail scraping functionality
+ */
+
 import appConstants from './appConstants.js';
 import csv from 'csvtojson';
 import fs from 'fs';

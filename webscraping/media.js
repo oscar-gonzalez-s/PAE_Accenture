@@ -1,3 +1,7 @@
+/**
+ * Script that integrates the social media scraping functionality
+ */
+
 import { cookiesConsent, rejectConsent } from './Utils.js';
 import { getUserData, login } from './insta.js';
 

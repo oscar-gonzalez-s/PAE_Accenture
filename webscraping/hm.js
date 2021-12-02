@@ -1,3 +1,9 @@
+/**
+ * Method to search a specific label in HM website
+ * @param {Puppeteer.Page} page Puppeteer page to evaluate
+ * @param {string} label Label detected by image recognition
+ * @returns {Object[]} List of the first two products found
+ */
 export default async function hm(page, label) {
 
   let gen = label.gender.trim() === 'hombre' ? 'men' : 'ladies';

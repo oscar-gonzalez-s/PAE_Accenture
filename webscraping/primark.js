@@ -1,3 +1,9 @@
+/**
+ * Method to search a specific label in Primark website
+ * @param {Puppeteer.Page} page Puppeteer page to evaluate
+ * @param {string} label Label detected by image recognition
+ * @returns {Object[]} List of the first two products found
+ */
 export default async function primark(page, label) {
 
   let gen = label.gender.trim() === 'hombre' ? 'mens' : 'womens';
