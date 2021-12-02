@@ -15,9 +15,9 @@ import puppeteer from 'puppeteer';
 (async () => { 
   try {
     // Delete old output file
-    await fs.unlink(appConstants.mediaOutput, () => {});
+    await fs.unlink(appConstants.mediaOutput, () => { });
     // Delete old image folder
-    await fs.rm(appConstants.downloadFolder, { recursive: true }, () => {});
+    await fs.rm(appConstants.downloadFolder, { recursive: true }, () => { });
 
     // Init browser
     const browser = await puppeteer.launch({ headless: false, devtools: false });

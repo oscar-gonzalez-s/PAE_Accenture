@@ -44,7 +44,7 @@ barn_red,"rojo",#7c0a02,124,10,2
 battleship_grey,"gris",#848482,132,132,130
 bazaar,"lila",#98777b,152,119,123
 beau_blue,"azul claro",#bcd4e6,188,212,230
-beaver,"marron",#9f8170,159,129,112
+beaver,"beige",#9f8170,159,129,112
 beige,"beige",#f5f5dc,245,245,220
 big_dip_o_ruby,"rojo",#9c2542,156,37,66
 bisque,"beige",#ffe4c4,255,228,196
@@ -400,7 +400,7 @@ la_salle_green,"verde",#087830,8,120,48
 languid_lavender,"lila",#d6cadd,214,202,221
 lapis_lazuli,"azul",#26619c,38,97,156
 laser_lemon,"amarillo",#fefe22,254,254,34
-laurel_green,"khaki",#a9ba9d,169,186,157
+laurel_green,"caqui",#a9ba9d,169,186,157
 lava,"rojo",#cf1020,207,16,32
 lavender_blue,"azul claro",#ccf,204,204,255
 lavender_blush,"rosa",#fff0f5,255,240,245
@@ -501,7 +501,7 @@ misty_rose,"rosa",#ffe4e1,255,228,225
 mode_beige,"marron",#967117,150,113,23
 moonstone_blue,"azul",#73a9c2,115,169,194
 mordant_red_19,"rojo",#ae0c00,174,12,0
-moss_green1,"khaki",#8A9A5B,138,154,91
+moss_green1,"caqui",#8A9A5B,138,154,91
 mountain_meadow,"verde",#30ba8f,48,186,143
 mountbatten_pink,"lila",#997a8d,153,122,141
 msu_green,"verde oscuro",#18453b,24,69,59
@@ -525,7 +525,7 @@ old_lace,"blanco",#fdf5e6,253,245,230
 old_lavender,"lila",#796878,121,104,120
 old_mauve,"granate",#673147,103,49,71
 old_rose,"rosa",#c08081,192,128,129
-olive,"khaki",#808000,128,128,0
+olive,"caqui",#808000,128,128,0
 olive_drab_web_olive_drab_3,"verde",#6b8e23,107,142,35
 olivine,"verde claro",#9ab973,154,185,115
 onyx,"gris",#353839,53,56,57
@@ -649,14 +649,14 @@ redwood,"marron",#ab4e52,171,78,82
 regalia,"lila",#522d80,82,45,128
 resolution_blue,"azul marino",#002387,0,35,135
 rich_black_fogra29,"negro",#010B13,1,11,19
-rich_black_fogra39,"negro",#0101203,,1,2,3
+rich_black_fogra39,"negro",#0101203,1,2,3
 rich_black,"verde oscuro",#004040,0,64,64
 rich_carmine,"rojo",#d70040,215,0,64
 rich_electric_blue,"azul",#0892d0,8,146,208
 rich_lavender,"lila",#a76bcf,167,107,207
 rich_lilac,"lila",#b666d2,182,102,210
 rich_maroon,"marron",#b03060,176,48,96
-rifle_green,"khaki",#414833,65,72,51
+rifle_green,"caqui",#414833,65,72,51
 robin_egg_blue,"azul",#0cc,0,204,204
 rose,"rosa",#ff007f,255,0,127
 rose_bonbon,"rosa",#f9429e,249,66,158
@@ -813,7 +813,7 @@ wild_strawberry,"rosa",#ff43a4,255,67,164
 wild_watermelon,"rosa",#fc6c85,252,108,133
 wisteria,"lila",#c9a0dc,201,160,220
 wood_brown,"beige",#c19a6b,193,154,107
-xanadu,"khaki",#738678,115,134,120
+xanadu,"caqui",#738678,115,134,120
 yale_blue,"azul marino",#0f4d92,15,77,146
 yellow,"amarillo",#ff0,255,255,0
 yellow_green,"verde",#9acd32,154,205,50
