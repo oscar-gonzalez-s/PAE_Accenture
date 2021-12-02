@@ -5,9 +5,9 @@
 import fs from 'fs';
 
 /**
- * Method to update retail output without modifying existing
- * @param data
- * @param path
+ * Method to update retail output without modifying existing one
+ * @param {Object} data Object that contains data to append
+ * @param {string} path  Path to retail output file
  *  */ 
 export const updateOutput = async (data, path) => {
   const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return {};});
@@ -20,9 +20,9 @@ export const updateOutput = async (data, path) => {
 
 /**
  * Method to update media output with individual user data
- * @param data
- * @param path
- * @param user
+ * @param {Object[]} data Array containing user's posts information
+ * @param {string} path Path to media output file
+ * @param {string} user Influencer username to log information
  *  */ 
 export const updateMediaOutput = async (data, path, user) => {
   const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return { output: [] };});
@@ -37,8 +37,8 @@ export const updateMediaOutput = async (data, path, user) => {
 };
 
 /**
- * Method to update accept cookies consent
- * @param page
+ * Method to accept cookies consent
+ * @param {Puppeteer.Page} page Puppeteer page to evaluate
  *  */ 
 export const cookiesConsent = async (page) => {
   console.log('Accepting cookies consent');
@@ -54,7 +54,7 @@ export const cookiesConsent = async (page) => {
 
 /**
  * Method to not save login info / dismiss notifications
- * @param page
+ * @param {Puppeteer.Page} page Puppeteer page to evaluate
  *  */ 
 export const rejectConsent = async (page) => {
   await page.evaluate(() => {

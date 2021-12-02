@@ -4,8 +4,8 @@ import isBetween from 'dayjs/plugin/isBetween.js';
 import { updateMediaOutput } from './Utils.js';
 
 /**
- * Method to enter username and password and submit
- * @param page
+ * Method to enter username and password and submit log in form
+ * @param {Puppeteer.Page} page Puppeteer page to evaluate
  *  */ 
 export const login = async (page) => {
   console.log('Logging in...');
@@ -18,9 +18,9 @@ export const login = async (page) => {
 
 /**
  * Method to get post links from username page and get data
- * @param page
- * @param user
- * @param gender
+ * @param {Puppeteer.Page} page Puppeteer page to evaluate
+ * @param {string} user Influencer username
+ * @param {string} gender Influencer gender
  *  */ 
 export const getUserData = async (page, user, gender) => {
   console.log(`Getting ${user} data...`);
@@ -54,9 +54,10 @@ export const getUserData = async (page, user, gender) => {
 
 /**
  * Method to get post data
- * @param page
- * @param src
- * @param additionalData
+ * @param {Puppeteer.Page} page Puppeteer page to evaluate
+ * @param {string} src Post url
+ * @param {Object} additionalData Object containing followers, username and gender
+ * @returns {Object | null} Post data or null if data was not found
  *  */ 
 const getPostData = async (page, src, additionalData) => {
 

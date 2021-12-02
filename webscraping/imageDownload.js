@@ -5,9 +5,9 @@ import path from 'path';
 
 /**
  * Method to download a single image
- * @param fileUrl 
- * @param downloadFolder 
- * @param imgName 
+ * @param {string} fileUrl Url to download the image
+ * @param {string} downloadFolder Folder to save the image
+ * @param {string} imgName Name of the image to download
  */
 const downloadFile = async (fileUrl, downloadFolder, imgName) => { // Download a single image
   // Set the file name
@@ -32,10 +32,9 @@ const downloadFile = async (fileUrl, downloadFolder, imgName) => { // Download a
 }; 
 
 /**
- * Download all the images of the json file
- * @param {string} path 
+ * Download all the images in the json file
+ * @param {string} path Path to media-output.json
  */
-
 const downloadAll = async (path) => { 
   const dir = appConstants.downloadFolder;
 
