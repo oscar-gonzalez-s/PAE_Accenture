@@ -19,4 +19,4 @@ fi
 GETF0="$1/DataProcessing/main.py"
 
 # CALL TO MAIN.PY
-python3 $GETF0 $2 $3 $4 $5 $6 $7 $8 $9 $10 > /dev/null || (echo "Error in $GETF0 $INPUT $LABEL_TXT"; exit 0)
+python3 $GETF0 $2 $3 $4 $5 $6 $7 $8 $9 ${10} || (echo "Error in $GETF0 $INPUT $LABEL_TXT"; exit 1)

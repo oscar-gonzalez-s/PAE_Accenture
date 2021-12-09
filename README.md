@@ -47,7 +47,7 @@ Contains the items predicted as trend and the percentage of appereance on their 
 Contains the results of 1 survey corresponding to a post posted on the telegram blog. Data stored here is passed to telegram-history.csv . 
 
 > media-output.json 
-Contains the information of all images conatined in instaImages folder. Meaning the following parameters are described for each image: "likes", "date", "imageSrc", "followers", "user", "gender". 
+Contains the information of all images contained in instaImages folder. Meaning the following parameters are described for each image: "likes", "date", "imageSrc", "followers", "user", "gender". 
 
 > recognition-output.json 
 Contains the information stored in media-output.json + the clothing items and their color, per image, recognized in Image Recognition. 
