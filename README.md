@@ -36,7 +36,7 @@ File is filled by rows, it documentates the results of the surveys of the Telegr
 Average_yes_proportion stores the average_yes_proportion of the telegram blog up to the last survey, not the average_yes_proportion of only the last survey. Analysis of this file serves to edit influencer score, stores in influencers.csv .
 
 > trend-items.csv 
-Contains a 2 column csv. Columns are: prenda, gender. 
+Contains a 3 column csv. Columns are: prenda, gender, influencers. 
 It contains the items that have been predicted as trend for the week. 
 
 > items-record.csv 
