@@ -4,7 +4,7 @@ import json
 import matplotlib.pyplot as plt
 import sys
 
-from DataPrediction import *  # imports also ScoreUtils and DataProcessing
+from DataPrediction import *  # imports also ScoreUtils and DataExtraction
 
 if __name__ == "__main__":
     """ Main Data Processing Programm
@@ -38,6 +38,9 @@ if __name__ == "__main__":
     # Score must be updated every time either:
     # - A prediction-history file is updated.
     # - A telegram file for a survey is generated.
+    nweeks = int(nweeks)
+    relevance = float(relevance)
+
     updateScore(update_predictionHistory, generate_telegramHistory, telegramdata, influencers,
                 telegramhistory, predictionhistory, postsDataFrame, relevance, nweeks)
     update_predictionHistory = False

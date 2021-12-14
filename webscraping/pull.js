@@ -6,11 +6,11 @@
  */
 export default async function pull(page, label) {
 
-  let gen = label.gender.trim() === 'hombre' ? 'hombre' : 'mujer';
-  let pren = label.prendas.trim().replace(/ +/g, '+');
+  let gender = label.gender === 'MAN' ? 'hombre' : 'mujer';
+  let items = label.item.trim().replace(/ +/g, '+');
 
   await page.goto(
-    `https://www.pullandbear.com/es/mujer-n6417?q=${pren}&filter=hierarchical_category%3A%22${gen}%22`,
+    `https://www.pullandbear.com/es/mujer-n6417?q=${items}&filter=hierarchical_category%3A%22${gender}%22`,
     { waitUntil: 'networkidle2' }
   );
 

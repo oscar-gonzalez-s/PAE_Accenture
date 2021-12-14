@@ -6,11 +6,11 @@
  */
 export default async function primark(page, label) {
 
-  let gen = label.gender.trim() === 'hombre' ? 'mens' : 'womens';
-  let pren = label.prendas.trim().replace(/ +/g, '+');
+  let gender = label.gender === 'MAN' ? 'hombre' : 'mujer';
+  let items = label.item.trim().replace(/ +/g, '+');
     
   await page.goto(
-    `https://www.primark.com/search?q=${pren}%3Arelevance%3AnextToRootCategoryName%3A${gen}`,
+    `https://www.primark.com/es/search?text=${items}+${gender}`,
     { waitUntil: 'networkidle2'}
   );
 

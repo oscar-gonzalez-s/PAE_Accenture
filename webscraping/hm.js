@@ -6,11 +6,11 @@
  */
 export default async function hm(page, label) {
 
-  let gen = label.gender.trim() === 'hombre' ? 'men' : 'ladies';
-  let pren = label.prendas.trim().replace(/ +/g, '+');
+  let gender = label.gender === 'MAN' ? 'men' : 'ladies';
+  let items = label.item.trim().replace(/ +/g, '+');
 
   await page.goto(
-    `https://www2.hm.com/es_es/search-results.html?q=${pren}&department=${gen}_all&sort=stock&image-size=small&image=stillLife&offset=0&page-size=40`,
+    `https://www2.hm.com/es_es/search-results.html?q=${items}&department=${gender}_all&sort=stock&image-size=small&image=stillLife&offset=0&page-size=40`,
     { waitUntil: 'networkidle2' }
   );
 

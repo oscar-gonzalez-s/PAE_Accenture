@@ -95,7 +95,7 @@ def confidenceEditor(filename, success_rate, influencer_name):
        Example: ConfidenceEditor("influencers.csv", -0.05 ,"raquelreitx")"""
 
     # reading the csv file
-    df = pd.read_csv("influencers.csv")
+    df = pd.read_csv(filename)
     # Count #influencers present in file
     length = pd.read_csv(filename, usecols=[0])
     length = length.values.shape[0]

@@ -8,6 +8,7 @@ import warnings
 warnings.filterwarnings(action='ignore', category=FutureWarning)
 
 from utils_my import Read_Img_2_Tensor, Load_DeepFashion2_Yolov3, Draw_Bounding_Box
+from preprocess import *
 from tensorflow.python.ops.gen_array_ops import empty
 import os
 import pandas as pd
@@ -38,9 +39,9 @@ def Detect_Clothes(img, model_yolov3, eager_execution=True):
     else:
         boxes, scores, classes, nums = model_yolov3.predict(img)
     t2 = time.time()
-    print('Yolo-v3 feed forward: {:.2f} sec'.format(t2 - t1))
+    #print('Yolo-v3 feed forward: {:.2f} sec'.format(t2 - t1))
 
-    print('detecting clothes...')
+    #print('detecting clothes...')
 
     class_names = ['camiseta_manga_corta', 'jersey', 'abrigo_manga_corta', 'abrigo_manga_larga',
                    'chaleco', 'top_tirantes_finos', 'pantalon_corto', 'pantalones', 'falda', 'vestido_manga_corta',
@@ -60,28 +61,33 @@ def Detect_Clothes(img, model_yolov3, eager_execution=True):
     return list_obj
 
 
-def Detect_Color(img_crop):
+def Detect_Color(img_crop, base_path):
     # #if the detection's confindence is not above the threshold: 'N/A'
     # if img_crop is None:
     #     return 'N/A'
 
     NUM_CLUSTERS = 5
 
-    print('detecting color...', end=' ')
-    im = img_crop
-    im = Image.fromarray((im * 255).astype(np.uint8))
+    #print('detecting color...', end=' ')
 
-    im = im.resize((150, 150))      # optional, to reduce time
-    #chroma = np.array([0, 177, 64], dtype=np.uint8)
+    img_crop = Image.fromarray((img_crop * 255).astype(np.uint8))
+    img_crop = np.asarray(img_crop)
+
+    ar_safe = np.asarray(img_crop)
+
+    im = to_chroma(img_crop)
+
+    chroma = np.array([0, 177, 64], dtype=np.uint8)
     ar = np.asarray(im)
 
     shape = ar.shape
-    ar = ar.reshape(np.product(shape[:2]), shape[2]).astype(float)
-    #print(ar.shape)
+    ar = ar.reshape(np.product(shape[:2]), shape[2]).astype(float)   
 
-    #print((ar != chroma).shape)
-    #ar = ar[not(ar == chroma).all(axis=1), :]
-    #print(ar.shape)
+    ar = ar[np.any(ar != chroma, axis=-1)]
+
+    if (ar.shape[0] == 0):
+        ar_safe = ar_safe.reshape(np.product(shape[:2]), shape[2]).astype(float)
+        ar = ar_safe
 
     #print('finding clusters')
     codes, dist = scipy.cluster.vq.kmeans(ar, NUM_CLUSTERS)
@@ -103,7 +109,8 @@ def Detect_Color(img_crop):
     b = peak[2]
 
     index = ["color", "color_name", "hex", "R", "G", "B"]
-    csv = pd.read_csv('bdcolores.csv', names=index, header=None)
+    csv_path = base_path + '/imageRecognition/crrv3_auto_git/bdcolores.csv'
+    csv = pd.read_csv(csv_path, names=index, header=None)
 
     minimum = 10000
     for i in range(len(csv)):
@@ -116,11 +123,11 @@ def Detect_Color(img_crop):
 
     #text = cname + ' R='+ str(r) +  ' G='+ str(g) +  ' B='+ str(b)
 
-    print(cname)
+    #print(cname)
     return cname
 
 
-def Detect_Clothes_and_Crop(img_tensor, model, list_obj, image_name, txt_name, threshold=0.5):
+def Detect_Clothes_and_Crop(img_tensor, model, list_obj, image_name, txt_name, base_path, threshold=0.5):
     """Receives image tensor, image name and the txt name to write the image's labels. Detects clothes in the image using Yolo-v3 model trained on DeepFashion2 dataset. Returns a list of images with the cropped clothing items + txt with the clothing items detected."""
 
     img_crop_list = []
@@ -139,9 +146,9 @@ def Detect_Clothes_and_Crop(img_tensor, model, list_obj, image_name, txt_name, t
         if obj['confidence'] > threshold:
             img_crop = img[int(obj['y1']*img_height):int(obj['y2']*img_height),
                            int(obj['x1']*img_width):int(obj['x2']*img_width), :]
-            print('Item: ' + obj['label'])
+            #print('Item: ' + obj['label'])
 
-        cname = Detect_Color(img_crop)
+        cname = Detect_Color(img_crop, base_path)
 
         # #if the detection's confindence is not above the threshold: 'N/A'
         # if cname=='N/A':
@@ -168,7 +175,7 @@ def resize_img(img_path):
 
     # read image
     img_original = cv2.imread(img_path)
-    print('Original dimensions : ', img_original.shape)
+    #print('Original dimensions : ', img_original.shape)
 
     # resize image
     height = img_original.shape[0]
@@ -187,7 +194,7 @@ def resize_img(img_path):
 
     dim = (width, height)
     img_resized = cv2.resize(img_original, dim, interpolation=cv2.INTER_AREA)
-    print('Resized dimensions : ', img_resized.shape)
+    #print('Resized dimensions : ', img_resized.shape)
 
     # Convert image to dtype string 0-D tensor
     flag, bts = cv2.imencode('.jpg', img_resized)
@@ -203,40 +210,41 @@ def resize_img(img_path):
 
 if __name__ == '__main__':
     """Receives the path of an image and the txt to write the labels and color, returns a .txt with the clothing items detected and their color"""
-    # input = '/veu4/usuaris26/pae2021/pae/PAE_Accenture-imageRecognition/assets/pipo'
-    # txt_name = '/veu4/usuaris26/pae2021/pae/PAE_Accenture-imageRecognition/assets/pipo/prueba.txt'
-
-    # ex:'/veu4/usuaris26/pae2021/pae/PAE_Accenture-imageRecognition/assets/pipo'
-    input = sys.argv[1]
-    # ex: '/veu4/usuaris26/pae2021/pae/PAE_Accenture-imageRecognition/assets/pipo/prueba.txt'
-    txt_name = sys.argv[2]
+    #ex: /veu4/usuaris26/pae2021/pae/PAE_Accenture
+    base_path = sys.argv[1]
+    # ex:'/veu4/usuaris26/pae2021/pae/PAE_Accenture/assets/instaImages'
+    input = sys.argv[2]
+    #print(input,'\n')
+    # ex: '/veu4/usuaris26/pae2021/pae/PAE_Accenture/assets/labels.txt'
+    txt_name = sys.argv[3]
+    #print(txt_name)
 
     if not(os.path.isdir(input)):
-        print('Invalid directory')
+        #print('Invalid directory')
         sys.exit()
 
     if os.path.exists(txt_name):
         os.remove(txt_name)
-        print("Overwriting file..." + '\n')
-    else:
-        print("Creating file..." + '\n')
+        #print("Overwriting file..." + '\n')
+    #else:
+        #print("Creating file..." + '\n')
 
     # img_path = sys.argv[1]          # ex: './images/c5.jpg'
     # txt_name = sys.argv[2]          # ex: "label.txt"
     # aux = img_path.split('/')
     # image_name = aux[-1]            # ex: 'c5.jpg'
 
-    model = Load_DeepFashion2_Yolov3()
+    model = Load_DeepFashion2_Yolov3(base_path)
 
     for image_name in os.scandir(input):
 
         img_path = input + '/' + image_name.name
-        print('\n' + '\n' + 'Reading image ' + image_name.name + '...' + '\n')
+        #print('\n' + '\n' + 'Reading image ' + image_name.name + '...' + '\n')
         img = resize_img(img_path)
 
         list_obj = Detect_Clothes(img, model)
         img_cropped_list = Detect_Clothes_and_Crop(
-            img, model, list_obj, image_name.name, txt_name)
+            img, model, list_obj, image_name.name, txt_name, base_path)
         img_with_boxes = Draw_Bounding_Box(img, list_obj)
 
         #cv2.imshow("Clothes detection", cv2.cvtColor(img_with_boxes, cv2.COLOR_RGB2BGR))
@@ -244,8 +252,9 @@ if __name__ == '__main__':
         # cv2.destroyAllWindows()
         #aux2 = image_name.name.split('.')
         #plain_name = aux2[0]
-        cv2.imwrite("/veu4/usuaris26/pae2021/pae/PAE_Accenture-imageRecognition/assets/pipo//outfit_detected/outfit_detected_" +
-                    image_name.name, cv2.cvtColor(img_with_boxes, cv2.COLOR_RGB2BGR)*255)
+
+        # cv2.imwrite("/veu4/usuaris26/pae2021/pae/PAE_Accenture-imageRecognition/assets/pipo//outfit_detected/outfit_detected_" +
+        #             image_name.name, cv2.cvtColor(img_with_boxes, cv2.COLOR_RGB2BGR)*255)
 
         # i = 1
 

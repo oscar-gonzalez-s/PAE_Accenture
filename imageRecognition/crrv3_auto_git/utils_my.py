@@ -95,10 +95,11 @@ def Read_Img_2_Tensor(img_path):
 
     return img
 
-def Load_DeepFashion2_Yolov3():
+def Load_DeepFashion2_Yolov3(base_path):
+    weights_path = base_path + '/imageRecognition/crrv3_auto_git/built_model/deepfashion2_yolov3'
     t1 = time.time()
     model = YoloV3(classes=13)
-    model.load_weights('./built_model/deepfashion2_yolov3')
+    model.load_weights(weights_path)
     t2 = time.time()
     print('Load DeepFashion2 Yolo-v3 from disk: {:.2f} sec'.format(t2 - t1))
 

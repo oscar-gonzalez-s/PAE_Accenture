@@ -182,8 +182,8 @@ def getPossibleTrend2(df):
     df['post_engagement'] = (df['likes'] / df['followers'])*100
     # * (37 - df['diff_days'])
 
-    m0, m1, m2, m3, m4, m5, m6 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-    total_avg0, total_avg1, total_avg2, total_avg3, total_avg4, total_avg5, total_avg6 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+    m0, m1, m2, m3, m4, m5 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+    total_avg0, total_avg1, total_avg2, total_avg3, total_avg4, total_avg5 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 
     # Sum of post_engagement by intervals according to #followers
     for i in range(0, len(df['followers'])):
@@ -208,13 +208,9 @@ def getPossibleTrend2(df):
             total_avg4 = df['post_engagement'][i] + total_avg4
             m4 = m4 + 1
 
-        elif (500000<= df['followers'][i] < 2000000):
+        elif (df['followers'][i] > 500000):
             total_avg5 = df['post_engagement'][i] + total_avg5
             m5 = m5 + 1
-
-        elif (df['followers'][i] > 2000000):
-            total_avg6 = df['post_engagement'][i] + total_avg6
-            m6 = m6 + 1
 
     '''print(m0,m1,m2,m3,m4,m5)
   print(total_avg0,total_avg1,total_avg2,total_avg3,total_avg4,total_avg5)
@@ -230,43 +226,37 @@ def getPossibleTrend2(df):
             df.loc[j, 'avg_interval'] = total_avg0/m0
             # Compare post_engagement with their interval_average_posts_engagement and weight the interval
             df.loc[j, 'value'] = (df['post_engagement']
-                                  [i] - df['avg_interval'][i])*df['score'][i]*0.2
+                                  [i] - df['avg_interval'][i])*0.5
             j = j+1
 
         elif((5000 <= df['followers'][i] < 20000) and (m1 > 0)):
             df.loc[j, 'avg_interval'] = total_avg1/m1
             df.loc[j, 'value'] = (df['post_engagement']
-                                  [i] - df['avg_interval'][i])**df['score'][i]*0.3
+                                  [i] - df['avg_interval'][i])*0.5
             j = j+1
 
         elif((20000 <= df['followers'][i] < 50000) and (m2 > 0)):
             df.loc[j, 'avg_interval'] = total_avg2/m2
             df.loc[j, 'value'] = (df['post_engagement']
-                                  [i] - df['avg_interval'][i])**df['score'][i]*0.4
+                                  [i] - df['avg_interval'][i])*0.5
             j = j+1
 
         elif((50000 <= df['followers'][i] < 200000) and (m3 > 0)):
             df.loc[j, 'avg_interval'] = total_avg3/m3
             df.loc[j, 'value'] = (df['post_engagement']
-                                  [i] - df['avg_interval'][i])*df['score'][i]*0.5
+                                  [i] - df['avg_interval'][i])*0.5
             j = j+1
 
         elif((200000 <= df['followers'][i] < 500000) and (m4 > 0)):
             df.loc[j, 'avg_interval'] = total_avg4/m4
             df.loc[j, 'value'] = (df['post_engagement']
-                                  [i] - df['avg_interval'][i])*df['score'][i]*0.6
+                                  [i] - df['avg_interval'][i])*0.5
             j = j+1
 
-        elif ((500000 <= df['followers'][i] > 2000000) and (m5 > 0)):
+        elif ((df['followers'][i] > 500000) and (m5 > 0)):
             df.loc[j, 'avg_interval'] = total_avg5/m5
             df.loc[j, 'value'] = (df['post_engagement']
-                                  [i] - df['avg_interval'][i])*df['score'][i]*0.7
-            j = j+1
-
-        elif ((df['followers'][i] > 2000000) and (m6 > 0)):
-            df.loc[j, 'avg_interval'] = total_avg6/m6
-            df.loc[j, 'value'] = (df['post_engagement']
-                                  [i] - df['avg_interval'][i])*df['score'][i]*0.8
+                                  [i] - df['avg_interval'][i])*0.5
             j = j+1
 
     return df
@@ -288,8 +278,14 @@ def labelsDF_finalscore(df, item):
             i], df_w_NA[item].value_counts()[i]
         j = j+1
 
-    df_item['counts'] = df_item['counts'].astype(float)
-    df_item['valid'] = (((df_item['counts'])/sum(df_item['counts']))< 0.10).astype(int)
+    # Discard the top 30% of the histogram
+    start = (round(len(df_w_NA[item].value_counts())*0.3))
+    v = [0] * len(df_w_NA[item].value_counts())
+
+    for i in range(start, len(df_w_NA[item].value_counts())):
+        v[i] = 1
+    # Add a new column to the dataframe to control if the item is in the top 30% of the histogram
+    df_item['valid'] = v
 
     # Sum all the 'values' ​​for each label to get its final score
     df_item['final_score'] = 0.0
@@ -315,39 +311,129 @@ def getwinner(df_labels):
             winner = df_labels['item'][i]
     return winner
 
-# if __name__ == "__main__":
-#     """ Main Data Processing Programm
-#     """
-#     #PARAMETERS
-#     #update_predictionHistory: boolean to indicate if items-record.csv has been updated
-#     #boolean to indicate if a telegram-data.json has been generated
-#     generate_telegramHistory = sys.argv[1]
-#     recognitionOutput = sys.argv[2]  # path to recognition-output.json
-#     influencers = sys.argv[3]  # path to influencers.csv
-#     telegramhistory = sys.argv[4]  # path to telegram-history.csv
-#     telegramdata = sys.argv[5]  # path to telegram-data.json
-#     predictionhistory = sys.argv[6]  # path to items-record.csv
-#     trenditems = sys.argv[7]  # path to trend-items.csv
-#     # parameter to determine the number of weeks that are taken into account for trend evolution
-#     nweeks = sys.argv[8] if len(sys.argv) > 8 else 3
-#     # parameter to determine the relevance Telegram results have on the calculus of the influencer score.
-#     relevance = sys.argv[9] if len(sys.argv) > 9 else 0
+if __name__ == "__main__":
+    """ Main Data Processing Programm
+    """
+    # PARAMETERS
+    # update_predictionHistory: boolean to indicate if items-record.csv has been updated
+    # boolean to indicate if a telegram-data.json has been generated
+    # generate_telegramHistory = sys.argv[1]
+    # recognitionOutput = sys.argv[2]  # path to recognition-output.json
+    # influencers = sys.argv[3]  # path to influencers.csv
+    # telegramhistory = sys.argv[4]  # path to telegram-history.csv
+    # telegramdata = sys.argv[5]  # path to telegram-data.json
+    # predictionhistory = sys.argv[6]  # path to items-record.csv
+    # trenditems = sys.argv[7]  # path to trend-items.csv
+    # # parameter to determine the number of weeks that are taken into account for trend evolution
+    # nweeks = sys.argv[8] if len(sys.argv) > 8 else 3
+    # # parameter to determine the relevance Telegram results have on the calculus of the influencer score.
+    # relevance = sys.argv[9] if len(sys.argv) > 9 else 0
 
-#     # CORE CODE
-#     # Data extraction
-#     postsDataFrame = DataExtraction(
-#         recognitionOutput, influencers)
-#     #print(postsDataFrame)
-#     # Data prediction
-#     # Make prediction (generate trenditems)
-#     # Actualize prediction history
-#     DataPrediction(postsDataFrame, influencers, trenditems, predictionhistory)
-#     update_predictionHistory = True
+    # CORE CODE
+    # Data extraction
+    recognitionOutput = '/veu4/usuaris26/pae2021/pae/PAE_Accenture/assets/recognition-output.json'
+    influencers= '/veu4/usuaris26/pae2021/pae/PAE_Accenture/assets/influencers.csv'
 
-#     # Score update
-#     # Score must be updated every time either:
-#     # - A prediction-history file is updated.
-#     # - A telegram file for a survey is generated.
-#     updateScore(update_predictionHistory, generate_telegramHistory, telegramdata, influencers,
-#                 telegramhistory, predictionhistory, postsDataFrame, relevance, nweeks)
-#     update_predictionHistory = False
+    postsDataFrame = DataExtraction(
+        recognitionOutput, influencers)
+    #print(postsDataFrame)
+    # Data prediction
+    # Make prediction (generate trenditems)
+    # Actualize prediction history
+    trenditems = '/veu4/usuaris26/pae2021/pae/PAE_Accenture/assets/trend-items.csv'
+    predictionhistory = '/veu4/usuaris26/pae2021/pae/PAE_Accenture/assets/items-record.csv' 
+    DataPrediction(postsDataFrame, influencers, trenditems, predictionhistory)
+    update_predictionHistory = True
+
+    # # Score update
+    # # Score must be updated every time either:
+    # # - A prediction-history file is updated.
+    # # - A telegram file for a survey is generated.
+    # updateScore(update_predictionHistory, generate_telegramHistory, telegramdata, influencers,
+    #             telegramhistory, predictionhistory, postsDataFrame, relevance, nweeks)
+    # update_predictionHistory = False
+
+# def getPossibleTrend2(df):
+
+#     # Create new colum in panda series format in order to calculate difference in days
+#     #today = pd.to_datetime("today")
+#     #df['diff_days']= (today - df['date']).dt.days + 1
+
+#     df['post_engagement'] = (df['likes'] / df['followers'])*100
+#     # * (37 - df['diff_days'])
+
+#     m0, m1, m2, m3, m4, m5 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+#     total_avg0, total_avg1, total_avg2, total_avg3, total_avg4, total_avg5 = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
+
+#     # Sum of post_engagement by intervals according to #followers
+#     for i in range(0, len(df['followers'])):
+
+#         if(0 <= df['followers'][i] < 5000):
+#             total_avg0 = df['post_engagement'][i] + total_avg0
+#             m0 = m0 + 1
+
+#         elif (5000 <= df['followers'][i] < 20000):
+#             total_avg1 = df['post_engagement'][i] + total_avg1
+#             m1 = m1 + 1
+
+#         elif (20000 <= df['followers'][i] < 50000):
+#             total_avg2 = df['post_engagement'][i] + total_avg2
+#             m2 = m2 + 1
+
+#         elif (50000 <= df['followers'][i] < 200000):
+#             total_avg3 = df['post_engagement'][i] + total_avg3
+#             m3 = m3 + 1
+
+#         elif (200000 <= df['followers'][i] < 500000):
+#             total_avg4 = df['post_engagement'][i] + total_avg4
+#             m4 = m4 + 1
+
+#         elif (df['followers'][i] > 500000):
+#             total_avg5 = df['post_engagement'][i] + total_avg5
+#             m5 = m5 + 1
+
+#     # Column with interval_average_posts_engagement
+#     df['avg_interval'] = 0.0
+#     df['value'] = 0.0
+#     j = 0
+#     for i in range(0, len(df['followers'])):
+#         if((0 <= df['followers'][i] < 5000) and (m0 > 0)):
+#             # Put interval_average_posts_engagement in 'avg_interval' column
+#             df.loc[j, 'avg_interval'] = total_avg0/m0
+#             # Compare post_engagement with their interval_average_posts_engagement and weight the interval
+#             df.loc[j, 'value'] = (df['post_engagement']
+#                                   [i] - df['avg_interval'][i])*0.5
+#             j = j+1
+
+#         elif((5000 <= df['followers'][i] < 20000) and (m1 > 0)):
+#             df.loc[j, 'avg_interval'] = total_avg1/m1
+#             df.loc[j, 'value'] = (df['post_engagement']
+#                                   [i] - df['avg_interval'][i])*0.5
+#             j = j+1
+
+#         elif((20000 <= df['followers'][i] < 50000) and (m2 > 0)):
+#             df.loc[j, 'avg_interval'] = total_avg2/m2
+#             df.loc[j, 'value'] = (df['post_engagement']
+#                                   [i] - df['avg_interval'][i])*0.5
+#             j = j+1
+
+#         elif((50000 <= df['followers'][i] < 200000) and (m3 > 0)):
+#             df.loc[j, 'avg_interval'] = total_avg3/m3
+#             df.loc[j, 'value'] = (df['post_engagement']
+#                                   [i] - df['avg_interval'][i])*0.5
+#             j = j+1
+
+#         elif((200000 <= df['followers'][i] < 500000) and (m4 > 0)):
+#             df.loc[j, 'avg_interval'] = total_avg4/m4
+#             df.loc[j, 'value'] = (df['post_engagement']
+#                                   [i] - df['avg_interval'][i])*0.5
+#             j = j+1
+
+#         elif ((df['followers'][i] > 500000) and (m5 > 0)):
+#             df.loc[j, 'avg_interval'] = total_avg5/m5
+#             df.loc[j, 'value'] = (df['post_engagement']
+#                                   [i] - df['avg_interval'][i])*0.5
+#             j = j+1
+
+#     return df
+
