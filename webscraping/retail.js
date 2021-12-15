@@ -35,7 +35,7 @@ const readers = { zara, primark, hm, pull };
       Object.entries(output).flatMap(([shop, results]) => 
       labels.map(async l => results.push(...await readers[shop](await browser.newPage(), l)))
       )
-      );
+    );
       
     await updateOutput(output, appConstants.retailOutput);
     

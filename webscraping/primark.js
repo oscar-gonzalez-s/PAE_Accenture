@@ -7,7 +7,7 @@
 export default async function primark(page, label) {
 
   let gender = label.gender === 'MAN' ? 'hombre' : 'mujer';
-  let items = label.item.trim().replace(/ +/g, '+');
+  let items = label.item.trim().replace(/_+/g, ' ').replace(/ +/g, '+');
     
   await page.goto(
     `https://www.primark.com/es/search?text=${items}+${gender}`,

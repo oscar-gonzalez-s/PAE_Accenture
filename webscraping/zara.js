@@ -7,7 +7,7 @@
 export default async function zara(page, label) {
 
   let gender = label.gender;
-  let items = label.item.trim().replace(/ +/g, '%20');
+  let items = label.item.trim().replace(/_+/g, ' ').replace(/ +/g, '%20');
 
   await page.goto(
     `https://www.zara.com/es/es/search?searchTerm=${items}&section=${gender}`,

@@ -10,8 +10,10 @@ const appConstants = {
   instagramAccount: {
     // username: 'smartrend.pae',
     // password: 'accenture'
-    username: 'pae.accenture',
-    password: 'accenture123'
+    // username: 'pae.accenture',
+    // password: 'accenture123'
+    username: 'accenture.pae',
+    password: 'accenture2021'
   }
 };
 

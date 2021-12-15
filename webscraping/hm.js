@@ -7,7 +7,7 @@
 export default async function hm(page, label) {
 
   let gender = label.gender === 'MAN' ? 'men' : 'ladies';
-  let items = label.item.trim().replace(/ +/g, '+');
+  let items = label.item.trim().replace(/_+/g, ' ').replace(/ +/g, '+');
 
   await page.goto(
     `https://www2.hm.com/es_es/search-results.html?q=${items}&department=${gender}_all&sort=stock&image-size=small&image=stillLife&offset=0&page-size=40`,

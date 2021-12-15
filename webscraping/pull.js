@@ -7,7 +7,7 @@
 export default async function pull(page, label) {
 
   let gender = label.gender === 'MAN' ? 'hombre' : 'mujer';
-  let items = label.item.trim().replace(/ +/g, '+');
+  let items = label.item.trim().replace(/_+/g, ' ').replace(/ +/g, '+');
 
   await page.goto(
     `https://www.pullandbear.com/es/mujer-n6417?q=${items}&filter=hierarchical_category%3A%22${gender}%22`,

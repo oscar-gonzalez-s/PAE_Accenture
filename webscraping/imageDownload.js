@@ -2,6 +2,7 @@ import appConstants from './appConstants.js';
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
+import { updateWithNA } from './Utils.js'
 
 /**
  * Method to download a single image
@@ -27,7 +28,7 @@ const downloadFile = async (fileUrl, downloadFolder, imgName) => { // Download a
     response.data.pipe(fs.createWriteStream(localFilePath));
   
   } catch (err) {
-    throw new Error(err);
+    await updateWithNA(imgName, appConstants.mediaOutput)
   }
 }; 
 

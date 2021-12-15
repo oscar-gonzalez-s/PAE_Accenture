@@ -37,6 +37,21 @@ export const updateMediaOutput = async (data, path, user) => {
 };
 
 /**
+ * Method to update media output when the download fails
+ * @param {number} i Index of the item to be changed
+ * @param {string} path Path to media output file
+ *  */ 
+export const updateWithNA = async (i, path) => {
+  const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return { output: [] };});
+
+  json.output[i].item0 = 'N/A N/A'
+  json.output[i].item1 = 'N/A N/A'
+
+  await fs.promises.writeFile(path, JSON.stringify(json, null, 4), 'utf8');
+  console.log('Image download failed. JSON file updated');
+};
+
+/**
  * Method to accept cookies consent
  * @param {Puppeteer.Page} page Puppeteer page to evaluate
  *  */ 
