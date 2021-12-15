@@ -1,11 +1,46 @@
 {
     "zara": [
         {
-            "name": "ABRIGO ROSEGARDEN LIMITED EDITION",
-            "price": "299,00",
-            "src": "https://www.zara.com/es/es/abrigo-rosegarden-limited-edition-p08548716.html",
+            "name": "PANTALÓN CONJUNTO SLIM",
+            "price": "29,95",
+            "src": "https://www.zara.com/es/es/pantal%C3%B3n-conjunto-slim-p01564411.html",
+            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
+            "gender": "MAN"
+        },
+        {
+            "name": "PANTALÓN PLIEGUES LIMITED EDITION",
+            "price": "59,95",
+            "src": "https://www.zara.com/es/es/pantal%C3%B3n-pliegues-limited-edition-p05900063.html",
+            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
+            "gender": "MAN"
+        },
+        {
+            "name": "JERSEY PUNTO EXTRA SOFT",
+            "price": "29,95",
+            "src": "https://www.zara.com/es/es/jersey-punto-extra-soft-p03597136.html",
             "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
             "gender": "WOMAN"
+        },
+        {
+            "name": "CCN KNT 07",
+            "price": "89,95",
+            "src": "https://www.zara.com/es/es/ccn-knt-07-p05755901.html",
+            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
+            "gender": "WOMAN"
+        },
+        {
+            "name": "JERSEY CUELLO VUELTO CON LANA",
+            "price": "29,95",
+            "src": "https://www.zara.com/es/es/jersey-cuello-vuelto-con-lana-p06771400.html",
+            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
+            "gender": "MAN"
+        },
+        {
+            "name": "JERSEY PERKINS CANALÉ",
+            "price": "25,95",
+            "src": "https://www.zara.com/es/es/jersey-perkins-canal%C3%A9-p03471301.html",
+            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
+            "gender": "MAN"
         },
         {
             "name": "PANTALÓN EFECTO PIEL ABERTURA",
@@ -15,156 +50,163 @@
             "gender": "WOMAN"
         },
         {
-            "name": "PANTALÓN JACQUARD LIMITED EDITION",
-            "price": "69,95",
-            "src": "https://www.zara.com/es/es/pantal%C3%B3n-jacquard-limited-edition-p02674931.html",
-            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
-            "gender": "MAN"
-        },
-        {
-            "name": "PANTALÓN JOGGER BÁSICO",
-            "price": "22,95",
-            "src": "https://www.zara.com/es/es/pantal%C3%B3n-jogger-b%C3%A1sico-p04087332.html",
-            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
-            "gender": "MAN"
-        },
-        {
-            "name": "JERSEY CON LANA",
-            "price": "35,95",
-            "src": "https://www.zara.com/es/es/jersey-con-lana-p03332318.html",
-            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
-            "gender": "MAN"
-        },
-        {
-            "name": "JERSEY BÁSICO CUELLO ALTO",
+            "name": "PANTALON FULL LENGTH",
             "price": "25,95",
-            "src": "https://www.zara.com/es/es/jersey-b%C3%A1sico-cuello-alto-p00693302.html",
-            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
-            "gender": "MAN"
-        },
-        {
-            "name": "PANTALÓN PANA SLIM FLARE",
-            "price": "25,95",
-            "src": "https://www.zara.com/es/es/pantal%C3%B3n-pana-slim-flare-p08741288.html",
-            "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
-            "gender": "WOMAN"
-        },
-        {
-            "name": "PANTALÓN BAGGY PAPERBAG",
-            "price": "25,95",
-            "src": "https://www.zara.com/es/es/pantal%C3%B3n-baggy-paperbag-p05862055.html",
+            "src": "https://www.zara.com/es/es/pantalon-full-length-p07385401.html",
             "imageSrc": "https://static.zara.net/stdstatic/1.248.0-b.18/images/transparent-background.png",
             "gender": "WOMAN"
         }
     ],
     "primark": [
         {
-            "name": "Pantalones cortos azul marino con estampado de bengalas",
-            "price": "7,00",
-            "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/ropa/pijamas/tops-partes-de-abajo/pantalones-cortos-azul-marino-con-estampado-de-bengalas/p/210083069",
-            "imageSrc": "https://primedia.primark.com/s/primark/210083069_ms?locale=en-*,sl-*,*&$product-thumbnail$",
-            "gender": "WOMAN"
-        },
-        {
-            "name": "Pantalón de punto azul con estampado de ondas",
-            "price": "18,00",
-            "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/ropa/jerseis-sudaderas/punto-cardigans/pantalon-de-punto-azul-con-estampado-de-ondas/p/210144112",
-            "imageSrc": "https://primedia.primark.com/s/primark/210144112_ms?locale=en-*,sl-*,*&$product-thumbnail$",
-            "gender": "WOMAN"
-        },
-        {
-            "name": "Jersey marrón prémium",
-            "price": "16,00",
-            "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/ropa/ropa-gimnasio/jersey-marron-premium/p/210157067",
-            "imageSrc": "https://primedia.primark.com/s/primark/210157067_ms?locale=en-*,sl-*,*&$product-thumbnail$",
-            "gender": "WOMAN"
-        },
-        {
-            "name": "Botines Chelsea marrones",
-            "price": "15,00",
-            "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/zapatos-botas/botas-altas-botines-chelsea/botines-chelsea-marrones/p/131679605",
-            "imageSrc": "https://primedia.primark.com/s/primark/131679605_ms?locale=en-*,sl-*,*&$product-thumbnail$",
-            "gender": "WOMAN"
-        },
-        {
-            "name": "Jersey acrílico liso blanco",
-            "price": "6,50",
-            "src": "https://www.primark.com/es/todos-los-productos/moda-para-hombre/ropa-para-hombre/sudaderas-con-y-sin-capucha/jerseis-sudaderas/jersey-acrilico-liso-blanco/p/131656686",
-            "imageSrc": "https://primedia.primark.com/s/primark/131656686_ms?locale=en-*,sl-*,*&$product-thumbnail$",
-            "gender": "MAN"
-        },
-        {
-            "name": "Jersey color caqui con hombros rígidos para niña mayor",
-            "price": "13,00",
-            "src": "https://www.primark.com/es/todos-los-productos/ninos/moda-para-ninas/mayor/sudaderas-con-capucha-camisetas/jersey-color-caqui-con-hombros-rigidos-para-nina-mayor/p/210038333",
-            "imageSrc": "https://primedia.primark.com/s/primark/210038333_ms?locale=en-*,sl-*,*&$product-thumbnail$",
-            "gender": "MAN"
-        },
-        {
-            "name": "Top de bikini marrón con volante en un hombro y estampado de hojas",
-            "price": "9,00",
-            "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/ropa/bano-playa/top-de-bikini-marron-con-volante-en-un-hombro-y-estampado-de-hojas/p/134405354",
-            "imageSrc": "https://primedia.primark.com/s/primark/134405354_ms?locale=en-*,sl-*,*&$product-thumbnail$",
-            "gender": "MAN"
-        },
-        {
             "name": "Pantalón de campana marrón liso con aperturas",
             "price": "13,00",
             "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/ropa/ropa-de-trabajo/pantalon-de-campana-marron-liso-con-aperturas/p/210141508",
             "imageSrc": "https://primedia.primark.com/s/primark/210141508_ms?locale=en-*,sl-*,*&$product-thumbnail$",
+            "gender": "WOMAN"
+        },
+        {
+            "name": "Pantalón marrón de pernera ancha con estampado floral",
+            "price": "21,00",
+            "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/ropa/todos-los-vaqueros/pantalon-marron-de-pernera-ancha-con-estampado-floral/p/210213505",
+            "imageSrc": "https://primedia.primark.com/s/primark/210213505_ms?locale=en-*,sl-*,*&$product-thumbnail$",
+            "gender": "WOMAN"
+        },
+        {
+            "name": "Abrigo verde oscuro",
+            "price": "18,00",
+            "src": "https://www.primark.com/es/todos-los-productos/moda-para-hombre/ropa-para-hombre/abrigos-chaquetas/abrigo-verde-oscuro/p/131553669",
+            "imageSrc": "https://primedia.primark.com/s/primark/131553669_ms?locale=en-*,sl-*,*&$product-thumbnail$",
             "gender": "MAN"
+        },
+        {
+            "name": "Manta grande suave verde oscuro de canalé",
+            "price": "16,00",
+            "src": "https://www.primark.com/es/todos-los-productos/articulos-para-el-hogar/menaje/mantas-y-cubrecamas/manta-grande-suave-verde-oscuro-de-canale/p/131750471",
+            "imageSrc": "https://primedia.primark.com/s/primark/131750471_ms?locale=en-*,sl-*,*&$product-thumbnail$",
+            "gender": "MAN"
+        },
+        {
+            "name": "Abrigo verde oscuro",
+            "price": "18,00",
+            "src": "https://www.primark.com/es/todos-los-productos/moda-para-hombre/ropa-para-hombre/abrigos-chaquetas/abrigo-verde-oscuro/p/131553669",
+            "imageSrc": "https://primedia.primark.com/s/primark/131553669_ms?locale=en-*,sl-*,*&$product-thumbnail$",
+            "gender": "MAN"
+        },
+        {
+            "name": "Manta grande suave verde oscuro de canalé",
+            "price": "16,00",
+            "src": "https://www.primark.com/es/todos-los-productos/articulos-para-el-hogar/menaje/mantas-y-cubrecamas/manta-grande-suave-verde-oscuro-de-canale/p/131750471",
+            "imageSrc": "https://primedia.primark.com/s/primark/131750471_ms?locale=en-*,sl-*,*&$product-thumbnail$",
+            "gender": "MAN"
+        },
+        {
+            "name": "Abrigo verde oscuro",
+            "price": "18,00",
+            "src": "https://www.primark.com/es/todos-los-productos/moda-para-hombre/ropa-para-hombre/abrigos-chaquetas/abrigo-verde-oscuro/p/131553669",
+            "imageSrc": "https://primedia.primark.com/s/primark/131553669_ms?locale=en-*,sl-*,*&$product-thumbnail$",
+            "gender": "WOMAN"
+        },
+        {
+            "name": "Pijama verde oscuro con estampado de diamantes",
+            "price": "10,00",
+            "src": "https://www.primark.com/es/todos-los-productos/moda-mujer/ropa/pijamas/tops-partes-de-abajo/pijama-verde-oscuro-con-estampado-de-diamantes/p/210055215",
+            "imageSrc": "https://primedia.primark.com/s/primark/210055215_ms?locale=en-*,sl-*,*&$product-thumbnail$",
+            "gender": "WOMAN"
         }
     ],
     "hm": [
         {
-            "name": "Chinos Slim Fit",
-            "price": "24,99",
-            "src": "https://www2.hm.com/es_es/productpage.0815456042.html",
-            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/ae/a1/aea1ab935e59b82d2d2760b5579e19526c042ae8.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
-            "gender": "MAN"
-        },
-        {
-            "name": "Pack de 2 Joggers Regular Fit",
-            "price": "29,99",
-            "src": "https://www2.hm.com/es_es/productpage.0970816006.html",
-            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/7e/75/7e7548723cb12d395cdb3a40ed019f02ae1255ed.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
-            "gender": "MAN"
-        },
-        {
             "name": "Sudadera Relaxed Fit",
             "price": "19,99",
-            "src": "https://www2.hm.com/es_es/productpage.0970819002.html",
-            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/94/cc/94cc07066a262e7d40b213aacc5b5f501572754d.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "src": "https://www2.hm.com/es_es/productpage.0970819021.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/fd/26/fd268180e2b0ff7427f6bd3602cf6fc6f9790479.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
             "gender": "MAN"
         },
         {
-            "name": "Sudadera Relaxed Fit",
+            "name": "Pack de 3 camisetas de punto Slim Fit",
             "price": "29,99",
-            "src": "https://www2.hm.com/es_es/productpage.1011083002.html",
-            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/8d/e6/8de659875f01da0a0d35885f424f27c00e992cf7.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "src": "https://www2.hm.com/es_es/productpage.0578626025.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/bf/9e/bf9e9cc0ad2cb462639ce44d88ffe598d3357b21.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
             "gender": "MAN"
         },
         {
-            "name": "Pantalón de chándal",
-            "price": "14,99",
-            "src": "https://www2.hm.com/es_es/productpage.0932722028.html",
-            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/8e/1a/8e1afc93481dd9c6545ef252ddf09bd42b56b794.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "name": "Sudadera con cremallera",
+            "price": "24,99",
+            "src": "https://www2.hm.com/es_es/productpage.1013870001.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/ad/8c/ad8c6e78d84306be8f11108e87a8a82510b6f17f.jpg],origin[dam],category[ladies_hoodiesswetshirts_sweatshirts],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
             "gender": "WOMAN"
         },
         {
-            "name": "Pantalón de punto",
-            "price": "19,99",
-            "src": "https://www2.hm.com/es_es/productpage.1007050001.html",
-            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/b5/9a/b59a32ea1dd1a580fec4fce3c5921fe6d8c3d2b9.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "name": "Jersey en punto de canalé con media cremallera",
+            "price": "39,99",
+            "src": "https://www2.hm.com/es_es/productpage.1012352002.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/61/9a/619aa94e1ce2b435885d13b237f4927f43da354d.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "gender": "WOMAN"
+        },
+        {
+            "name": "Pack de 2 pantalones de pijama",
+            "price": "24,99",
+            "src": "https://www2.hm.com/es_es/productpage.0827792007.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/fc/38/fc38081e5a31c7ae17b4f18a08849e2cc901d6ae.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "gender": "MAN"
+        },
+        {
+            "name": "Pack de 2 pantalones de pijama",
+            "price": "29,99",
+            "src": "https://www2.hm.com/es_es/productpage.0947060011.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/15/02/1502804afe3ce51bf6a8c42a065f9e145a7031cf.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "gender": "MAN"
+        },
+        {
+            "name": "Pantalón amplio de sarga",
+            "price": "14,99",
+            "src": "https://www2.hm.com/es_es/productpage.0963087016.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/46/22/4622110baf3403932f5c22997d9729559a5e8ff2.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+            "gender": "WOMAN"
+        },
+        {
+            "name": "Pantalón recto de lentejuelas",
+            "price": "49,99",
+            "src": "https://www2.hm.com/es_es/productpage.1006294001.html",
+            "imageSrc": "https://lp2.hm.com/hmgoepprod?set=source[/30/2d/302d7aef1b4b6f2a183a02f761447caeff5094a3.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
             "gender": "WOMAN"
         }
     ],
     "pull": [
         {
-            "name": "Sudadera marrón gráfico montaña",
+            "name": "Jersey punto cuello redondo",
+            "price": "25,99",
+            "src": "https://www.pullandbear.com/es/hombre-c1010141504p502819963.html?colorId=749",
+            "imageSrc": "https://static.pullandbear.net/2/photos/2021/I/0/2/p/4556/507/749/4556507749_2_1_2.jpg?t=1635162184573",
+            "gender": "MAN"
+        },
+        {
+            "name": "Jersey básico punto cuello alto",
+            "price": "25,99",
+            "src": "https://www.pullandbear.com/es/hombre-c1010141504p502817805.html?colorId=422",
+            "imageSrc": "https://static.pullandbear.net/2/photos/2021/I/0/2/p/8556/506/422/8556506422_2_1_2.jpg?t=1633450967813",
+            "gender": "MAN"
+        },
+        {
+            "name": "Pantalón jogger detalles contraste",
+            "price": "17,99",
+            "src": "https://www.pullandbear.com/es/hombre-c1010141504p502820759.html?colorId=507",
+            "imageSrc": "https://static.pullandbear.net/2/photos/2021/I/0/2/p/8676/505/507/8676505507_2_1_2.jpg?t=1634724251050",
+            "gender": "MAN"
+        },
+        {
+            "name": "Jersey punto rayas color",
             "price": "22,99",
-            "src": "https://www.pullandbear.com/es/mujer-c1010141503p503772413.html?colorId=700",
-            "imageSrc": "https://static.pullandbear.net/2/photos/2021/I/0/1/p/8591/367/700/8591367700_2_1_2.jpg?t=1638460053501",
+            "src": "https://www.pullandbear.com/es/mujer-c1010141503p511761039.html?colorId=716",
+            "imageSrc": "https://static.pullandbear.net/2/photos/2021/I/0/1/p/4555/300/716/4555300716_2_1_2.jpg?t=1636624954792",
+            "gender": "WOMAN"
+        },
+        {
+            "name": "Jersey punto rayas cremallera",
+            "price": "29,99",
+            "src": "https://www.pullandbear.com/es/mujer-c1010141503p510382344.html?colorId=500",
+            "imageSrc": "https://static.pullandbear.net/2/photos/2022/V/0/1/p/4555/309/500/4555309500_2_1_2.jpg?t=1639062612304",
             "gender": "WOMAN"
         },
         {
@@ -175,45 +217,10 @@
             "gender": "WOMAN"
         },
         {
-            "name": "Jersey básico cuello alto colores",
-            "price": "17,99",
-            "src": "https://www.pullandbear.com/es/hombre-c1010141504p510373811.html?colorId=251",
-            "imageSrc": "https://static.pullandbear.net/2/photos/2022/V/0/2/p/9553/507/251/9553507251_2_1_2.jpg?t=1639018296260",
-            "gender": "MAN"
-        },
-        {
-            "name": "Jersey punto contrastes color",
-            "price": "39,99",
-            "src": "https://www.pullandbear.com/es/hombre-c1010141504p503016059.html?colorId=251",
-            "imageSrc": "https://static.pullandbear.net/2/photos/2021/I/0/2/p/8556/520/251/8556520251_2_1_2.jpg?t=1638273679799",
-            "gender": "MAN"
-        },
-        {
-            "name": "Jeans worker marrón",
-            "price": "29,99",
-            "src": "https://www.pullandbear.com/es/hombre-c1010141504p502940011.html?colorId=700",
-            "imageSrc": "https://static.pullandbear.net/2/photos/2021/I/0/2/p/8685/530/700/8685530700_2_1_2.jpg?t=1636453109882",
-            "gender": "MAN"
-        },
-        {
-            "name": "Jeans color detalle lavado",
-            "price": "29,99",
-            "src": "https://www.pullandbear.com/es/hombre-c1010141504p510383773.html?colorId=707",
-            "imageSrc": "https://static.pullandbear.net/2/photos/2022/V/0/2/p/8685/917/707/8685917707_2_1_2.jpg?t=1638890354683",
-            "gender": "MAN"
-        },
-        {
-            "name": "Pantalón campana tejido brillo",
-            "price": "19,99",
-            "src": "https://www.pullandbear.com/es/mujer-c1010141503p510385262.html?colorId=431",
-            "imageSrc": "https://static.pullandbear.net/2/photos/2022/V/0/1/p/4674/313/431/4674313431_2_1_2.jpg?t=1637317292373",
-            "gender": "WOMAN"
-        },
-        {
-            "name": "Pantalón campana fluido",
-            "price": "19,99",
-            "src": "https://www.pullandbear.com/es/mujer-c1010141503p510370975.html?colorId=442",
-            "imageSrc": "https://static.pullandbear.net/2/photos/2022/V/0/1/p/4674/316/442/4674316442_2_1_2.jpg?t=1637261479156",
+            "name": "Pantalón recto sarga",
+            "price": "22,99",
+            "src": "https://www.pullandbear.com/es/mujer-c1010141503p510975406.html?colorId=730",
+            "imageSrc": "https://static.pullandbear.net/2/photos/2022/V/0/1/p/4674/314/730/4674314730_2_1_2.jpg?t=1637935312605",
             "gender": "WOMAN"
         }
     ]

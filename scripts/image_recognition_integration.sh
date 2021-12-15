@@ -21,7 +21,7 @@ GETF1="$BASE_PATH/imageRecognition/crrv3_auto_git/json_edit.py"
 INPUT=$DIR_NAME/instaImages #in final implementation dir will be 'instaImages'
 LABEL_TXT=$DIR_NAME/labels.txt
 echo "Executing cloth_detection.py..."
-python3 $GETF0 $BASE_PATH $INPUT $LABEL_TXT > /dev/null || (echo "Error in $GETF0 $INPUT $LABEL_TXT"; exit 1)
+python3 $GETF0 $BASE_PATH $INPUT $LABEL_TXT || (echo "Error in $GETF0 $INPUT $LABEL_TXT"; exit 1)
 
 # CALL TO JSON_EDIT.PY
 #Create json copy to store label info 

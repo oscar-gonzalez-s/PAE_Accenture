@@ -1,13 +1,21 @@
-item,gender,influencers,13/12/2021 20:29:37h,13/12/2021 20:32:48h,13/12/2021 20:37:12h
-jersey blanco,MAN,artur__fit;magno_scavo;lucadebrito;goonza_costa;casoperdido,0.0674,0.0674,0.0674
-pantalones marron,MAN,omarspaneshi;andreafaccio;artur__fit;menwithclass;youssefesawy;elefv;menwithstreetstyle,0.0909,0.0909,0.0909
-abrigo_manga_larga marron,WOMAN,lau_closet;zara.outfits;angelina.lilienne;outfitbook_;thanyaw,0.0407,0.0407,0.0407
-pantalones azul,WOMAN,itsemilyjames;zara.outfits;traffygirls,0.0465,0.0465,0.0465
-jersey blanco,MAN,lucadebrito;magno_scavo;artur__fit;goonza_costa;casoperdido,0.0,0.0674,0.0674
-pantalones marron,MAN,menwithstreetstyle;elefv;omarspaneshi;andreafaccio;youssefesawy;artur__fit;menwithclass,0.0,0.0909,0.0909
-abrigo_manga_larga marron,WOMAN,angelina.lilienne;lau_closet;thanyaw;zara.outfits;outfitbook_,0.0,0.0407,0.0407
-pantalones azul,WOMAN,traffygirls;zara.outfits;itsemilyjames,0.0,0.0465,0.0465
-jersey blanco,MAN,lucadebrito;magno_scavo;goonza_costa;casoperdido;artur__fit,0.0,0.0,0.0674
-pantalones marron,MAN,youssefesawy;andreafaccio;omarspaneshi;menwithclass;menwithstreetstyle;elefv;artur__fit,0.0,0.0,0.0909
-abrigo_manga_larga marron,WOMAN,zara.outfits;outfitbook_;angelina.lilienne;lau_closet;thanyaw,0.0,0.0,0.0407
-pantalones azul,WOMAN,zara.outfits;itsemilyjames;traffygirls,0.0,0.0,0.0465
+item,gender,influencers,13/12/2021 20:29:37h,13/12/2021 20:32:48h,13/12/2021 20:37:12h,15/12/2021 13:01:21h,15/12/2021 20:21:25h
+jersey blanco,MAN,artur__fit;magno_scavo;lucadebrito;goonza_costa;casoperdido,0.0674,0.0674,0.0674,0.0,0.0
+pantalones marron,MAN,omarspaneshi;andreafaccio;artur__fit;menwithclass;youssefesawy;elefv;menwithstreetstyle,0.0909,0.0909,0.0909,0.11699999999999999,0.1277
+abrigo_manga_larga marron,WOMAN,lau_closet;zara.outfits;angelina.lilienne;outfitbook_;thanyaw,0.0407,0.0407,0.0407,0.0604,0.0604
+pantalones azul,WOMAN,itsemilyjames;zara.outfits;traffygirls,0.0465,0.0465,0.0465,0.03,0.03
+jersey blanco,MAN,lucadebrito;magno_scavo;artur__fit;goonza_costa;casoperdido,0.0,0.0674,0.0674,0.0,0.0
+pantalones marron,MAN,menwithstreetstyle;elefv;omarspaneshi;andreafaccio;youssefesawy;artur__fit;menwithclass,0.0,0.0909,0.0909,0.11699999999999999,0.1277
+abrigo_manga_larga marron,WOMAN,angelina.lilienne;lau_closet;thanyaw;zara.outfits;outfitbook_,0.0,0.0407,0.0407,0.0604,0.0604
+pantalones azul,WOMAN,traffygirls;zara.outfits;itsemilyjames,0.0,0.0465,0.0465,0.03,0.03
+jersey blanco,MAN,lucadebrito;magno_scavo;goonza_costa;casoperdido;artur__fit,0.0,0.0,0.0674,0.0,0.0
+pantalones marron,MAN,youssefesawy;andreafaccio;omarspaneshi;menwithclass;menwithstreetstyle;elefv;artur__fit,0.0,0.0,0.0909,0.11699999999999999,0.1277
+abrigo_manga_larga marron,WOMAN,zara.outfits;outfitbook_;angelina.lilienne;lau_closet;thanyaw,0.0,0.0,0.0407,0.0604,0.0604
+pantalones azul,WOMAN,zara.outfits;itsemilyjames;traffygirls,0.0,0.0,0.0465,0.03,0.03
+jersey verde oscuro,MAN,ric_fonsi;andre20santos;alessandrosquarzi,0.0,0.0,0.0,0.0303,0.0303
+pantalones verde oscuro,MAN,menwithclass;nas_424_;menwithstreetstyle;alessandrosquarzi,0.0,0.0,0.0,0.0532,0.0745
+abrigo_manga_larga verde oscuro,WOMAN,isabelcamposr;zara.outfits;yasmindevonport_;ladyaddict,0.0,0.0,0.0,0.0403,0.0336
+pantalones marron,WOMAN,outfitbook_;raquelreitx;lauacedo;rahaftheofficial;paulinenavy,0.0,0.0,0.0,0.06,0.08
+jersey verde oscuro,MAN,ric_fonsi;alessandrosquarzi;andre20santos,0.0,0.0,0.0,0.0,0.0303
+pantalones verde oscuro,MAN,nas_424_;menwithstreetstyle;lucadebrito;sammarvin_;menwithclass;alessandrosquarzi,0.0,0.0,0.0,0.0,0.0745
+jersey verde oscuro,WOMAN,sasabylopez;mathilderodrigues_;thanyaw;terriface;zara.outfits;outfitbook_;dilara.kx,0.0,0.0,0.0,0.0,0.047
+pantalones marron,WOMAN,raquelreitx;celiafroman;paulinenavy;rahaftheofficial;outfitbook_;lauacedo,0.0,0.0,0.0,0.0,0.08

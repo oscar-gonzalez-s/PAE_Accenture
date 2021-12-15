@@ -286,7 +286,7 @@ def predictorEditor(phistorypath, infilepath, nweeks, relevance):
     # we are interested in.
     nonfreecolumns = df_phist.apply(
         lambda x: x.notnull().sum(), axis='columns')
-    print(nonfreecolumns)
+    #print(nonfreecolumns)
     indexes = []
     count = 0
     for i in range(len(nonfreecolumns)):

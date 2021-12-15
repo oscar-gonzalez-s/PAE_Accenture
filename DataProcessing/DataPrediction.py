@@ -216,9 +216,9 @@ def getPossibleTrend2(df):
             total_avg6 = df['post_engagement'][i] + total_avg6
             m6 = m6 + 1
 
-    '''print(m0,m1,m2,m3,m4,m5)
-  print(total_avg0,total_avg1,total_avg2,total_avg3,total_avg4,total_avg5)
-  print(total_avg0/m0,total_avg1/m1,total_avg2/m2,total_avg3/m3,total_avg4/m4,total_avg5/m5)'''
+#   print(m0,m1,m2,m3,m4,m5)
+#   print(total_avg0,total_avg1,total_avg2,total_avg3,total_avg4,total_avg5)
+#   print(total_avg0/m0,total_avg1/m1,total_avg2/m2,total_avg3/m3,total_avg4/m4,total_avg5/m5)
 
     # Column with interval_average_posts_engagement
     df['avg_interval'] = 0.0

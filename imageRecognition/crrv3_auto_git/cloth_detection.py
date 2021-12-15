@@ -39,9 +39,9 @@ def Detect_Clothes(img, model_yolov3, eager_execution=True):
     else:
         boxes, scores, classes, nums = model_yolov3.predict(img)
     t2 = time.time()
-    #print('Yolo-v3 feed forward: {:.2f} sec'.format(t2 - t1))
+    print('Yolo-v3 feed forward: {:.2f} sec'.format(t2 - t1))
 
-    #print('detecting clothes...')
+    print('detecting clothes...')
 
     class_names = ['camiseta_manga_corta', 'jersey', 'abrigo_manga_corta', 'abrigo_manga_larga',
                    'chaleco', 'top_tirantes_finos', 'pantalon_corto', 'pantalones', 'falda', 'vestido_manga_corta',
@@ -68,7 +68,7 @@ def Detect_Color(img_crop, base_path):
 
     NUM_CLUSTERS = 5
 
-    #print('detecting color...', end=' ')
+    print('detecting color...', end=' ')
 
     img_crop = Image.fromarray((img_crop * 255).astype(np.uint8))
     img_crop = np.asarray(img_crop)
@@ -123,7 +123,7 @@ def Detect_Color(img_crop, base_path):
 
     #text = cname + ' R='+ str(r) +  ' G='+ str(g) +  ' B='+ str(b)
 
-    #print(cname)
+    print(cname)
     return cname
 
 
@@ -146,7 +146,7 @@ def Detect_Clothes_and_Crop(img_tensor, model, list_obj, image_name, txt_name, b
         if obj['confidence'] > threshold:
             img_crop = img[int(obj['y1']*img_height):int(obj['y2']*img_height),
                            int(obj['x1']*img_width):int(obj['x2']*img_width), :]
-            #print('Item: ' + obj['label'])
+            print('Item: ' + obj['label'])
 
         cname = Detect_Color(img_crop, base_path)
 
@@ -175,7 +175,7 @@ def resize_img(img_path):
 
     # read image
     img_original = cv2.imread(img_path)
-    #print('Original dimensions : ', img_original.shape)
+    print('Original dimensions : ', img_original.shape)
 
     # resize image
     height = img_original.shape[0]
@@ -194,7 +194,7 @@ def resize_img(img_path):
 
     dim = (width, height)
     img_resized = cv2.resize(img_original, dim, interpolation=cv2.INTER_AREA)
-    #print('Resized dimensions : ', img_resized.shape)
+    print('Resized dimensions : ', img_resized.shape)
 
     # Convert image to dtype string 0-D tensor
     flag, bts = cv2.imencode('.jpg', img_resized)
@@ -225,9 +225,9 @@ if __name__ == '__main__':
 
     if os.path.exists(txt_name):
         os.remove(txt_name)
-        #print("Overwriting file..." + '\n')
+        print("Overwriting file..." + '\n')
     #else:
-        #print("Creating file..." + '\n')
+        print("Creating file..." + '\n')
 
     # img_path = sys.argv[1]          # ex: './images/c5.jpg'
     # txt_name = sys.argv[2]          # ex: "label.txt"
@@ -239,7 +239,7 @@ if __name__ == '__main__':
     for image_name in os.scandir(input):
 
         img_path = input + '/' + image_name.name
-        #print('\n' + '\n' + 'Reading image ' + image_name.name + '...' + '\n')
+        print('\n' + '\n' + 'Reading image ' + image_name.name + '...' + '\n')
         img = resize_img(img_path)
 
         list_obj = Detect_Clothes(img, model)

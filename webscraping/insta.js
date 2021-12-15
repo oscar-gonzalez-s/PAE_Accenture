@@ -61,7 +61,12 @@ export const getUserData = async (page, user, gender) => {
  *  */ 
 const getPostData = async (page, src, additionalData) => {
 
-  await page.goto(src, { waitUntil: 'networkidle2' });
+  try {
+    await page.goto(src, { waitUntil: 'networkidle2' });
+  } catch (e) {
+    console.log('Navigation Timeout Error');
+    return null;
+  }
 
   const output = await page.evaluate(() => {
     const imageSrc = document.querySelector('.ltEKP .KL4Bh img')?.src;

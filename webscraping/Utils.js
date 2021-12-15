@@ -44,8 +44,12 @@ export const updateMediaOutput = async (data, path, user) => {
 export const updateWithNA = async (i, path) => {
   const json = await fs.promises.readFile(path).then(json => JSON.parse(json)).catch(() => {return { output: [] };});
 
-  json.output[i].item0 = 'N/A N/A'
-  json.output[i].item1 = 'N/A N/A'
+  if (json.output[i]) {
+    return;
+  }
+
+  json.output[i].item0 = 'N/A N/A';
+  json.output[i].item1 = 'N/A N/A';
 
   await fs.promises.writeFile(path, JSON.stringify(json, null, 4), 'utf8');
   console.log('Image download failed. JSON file updated');

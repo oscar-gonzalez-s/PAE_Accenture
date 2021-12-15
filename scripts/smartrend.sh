@@ -11,8 +11,8 @@ mkdir -p $DIR_HIST
 
 # Run media scraping
 echo "Scraping media images..."
-node $BASE_PATH/webscraping/media.js | tee $DIR_LOGS/media-scraping.txt
-[ ${PIPESTATUS[0]} == 1 ] && { echo "Error: Media scraping execution failed. Logs at directory $DIR_LOGS"; exit 1; }
+# node $BASE_PATH/webscraping/media.js | tee $DIR_LOGS/media-scraping.txt
+# [ ${PIPESTATUS[0]} == 1 ] && { echo "Error: Media scraping execution failed. Logs at directory $DIR_LOGS"; exit 1; }
 cp $DIR_ASSETS/media-output.json $DIR_HIST/media-output_$(date '+%d_%m_%Y').json || exit 1
 
 # Run image recognition
