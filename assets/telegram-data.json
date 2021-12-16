@@ -1,0 +1,14 @@
+[
+    {
+        "text": "Si",
+        "voter_count": 2,
+        "item": "jersey gris",
+        "gender": "WOMAN"
+    },
+    {
+        "text": "No",
+        "voter_count": 1,
+        "item": "jersey gris",
+        "gender": "WOMAN"
+    }
+]

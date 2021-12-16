@@ -1,0 +1,10 @@
+webscraping/node_modules
+webscraping/*.png
+webscraping/*.json
+!webscraping/.eslintrc.json
+assets/instaImages/*
+logs/**
+imageRecognition/crrv3_auto_git/images/*
+imageRecognition/crrv3_auto_git/images/outfits_detected/*
+.DS_Store
+**/.vscode/*
