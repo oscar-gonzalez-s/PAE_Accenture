@@ -1,4 +1,15 @@
-#ASSETS FOLDER DEFINITION 
+# EXECUTION INSTRUCTION
+To execute Smartrend main app, you'll need to first change the bash variable **BASE_PATH** to the path you saved the project.
+Once the variable settle, you'll be able to run Smartrend app on your computer !
+You only have to execute the bash script hosted in the "scripts" folder.
+
+Exemple: 
+'''
+bash ./smartrend.sh
+'''
+
+
+# ASSETS FOLDER DEFINITION 
 
 **Assets folder is expected to contain the following files:**
 > influencers.csv 
