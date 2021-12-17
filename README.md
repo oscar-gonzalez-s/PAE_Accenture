@@ -8,7 +8,9 @@ You only have to execute the bash script hosted in the "scripts" folder.
 ```
 bash ./smartrend.sh
 ```
+To download the RCNN Yolo-V3 weigths, enter the link below and follow the instructions:
 
+https://drive.google.com/drive/folders/1gfZ9ulsYe-LpC5uceOPj_t7ZM7OXCrtR?usp=sharing
 
 # ASSETS FOLDER DEFINITION 
 
